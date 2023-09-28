@@ -1,0 +1,40 @@
+[project]
+name = "jupyter_scad"
+authors = [{name = "Jennifer Reiber Kyle"}]
+description = "Solid 3D Cad (SCAD) renderer and viewer for Jupyter"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = [
+    "openscad",
+    "scad",
+    "jupyter",
+    "jupyterlab",
+    "notebook",
+    "viewer",
+    "render",
+    "solidpython",
+    "solidpython2"]
+license = {text = "GPLv3"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "numpy-stl",
+    "ipywidgets",
+    "pythreejs",
+    "solidpython2",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    'ignore:Sentinel:DeprecationWarning'
+]
+[tool.setuptools.packages.find]
+exclude = ["jupyter_scad.tests*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "jupyter_scad.__version__"}
