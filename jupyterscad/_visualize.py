@@ -31,11 +31,6 @@ def visualize(obj, width=400, height=400, grid_unit=1):
     return v
 
 
-def visualize_stl(filename, width=400, height=400, grid_unit=1):
-    v = Visualizer(filename)
-    return v.create_renderer(v.create_mesh(), v.create_camera(), width=width, height=height, grid_unit=grid_unit)
-
-
 class Visualizer():
     def __init__(self, stl_file):
         self.stl_mesh = stl.mesh.Mesh.from_file(stl_file)
