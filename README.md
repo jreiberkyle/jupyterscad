@@ -20,7 +20,7 @@ Or, one can use [ViewSCAD](https://github.com/nickc92/ViewSCAD), which was the m
 To simply install the package, use pip:
 
 ```
-pip install githubaddress
+pip install git+https://github.com/jreiberkyle/jupyter_scad.git
 ```
 
 Alternately, the entire Jupyter notebook, SolidPython2, and Jupyter SCAD setup could be run as a [podman]() container.

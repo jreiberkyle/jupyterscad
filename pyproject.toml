@@ -1,5 +1,5 @@
 [project]
-name = "jupyter_scad"
+name = "jupyterscad"
 authors = [{name = "Jennifer Reiber Kyle"}]
 description = "Solid 3D Cad (SCAD) renderer and viewer for Jupyter"
 readme = "README.md"
@@ -34,7 +34,7 @@ filterwarnings = [
     'ignore:Sentinel:DeprecationWarning'
 ]
 [tool.setuptools.packages.find]
-exclude = ["jupyter_scad.tests*"]
+exclude = ["jupyterscad.tests*"]
 
 [tool.setuptools.dynamic]
-version = {attr = "jupyter_scad.__version__"}
+version = {attr = "jupyterscad.__version__"}
