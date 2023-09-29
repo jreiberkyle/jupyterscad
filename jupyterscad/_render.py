@@ -22,6 +22,7 @@ import tempfile
 import typing
 
 from .exceptions import OpenSCADException
+from ._visualize import visualize_stl
 
 DEFAULT_OPENSCAD_EXECUTABLE = {
     'Linux': ['/usr/bin/openscad', '/usr/local/bin/openscad'],
@@ -31,7 +32,18 @@ DEFAULT_OPENSCAD_EXECUTABLE = {
 LOGGER = logging.getLogger(__name__)
 
 
-def render(obj, output_file, openscad_exec: Path = None):
+def render(obj, width=400, height=400, grid_unit=1, outfile=None, openscad_exec: Path = None):
+    if outfile:
+        render_stl(str(obj), outfile, openscad_exec=openscad_exec)
+        r = visualize_stl(outfile, width=width, height=height, grid_unit=grid_unit)
+    else:
+        with tempfile.NamedTemporaryFile(suffix='.stl', delete=False) as stl_tmp_file:
+            render_stl(str(obj), stl_tmp_file.name, openscad_exec=openscad_exec)
+            r = visualize_stl(stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit)
+    return r
+
+
+def render_stl(obj, output_file, openscad_exec: Path = None):
     
     with tempfile.NamedTemporaryFile(suffix='.scad', delete=False) as scad_tmp_file:
         with open(scad_tmp_file.name, 'w') as fp:

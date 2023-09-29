@@ -20,19 +20,10 @@ import tempfile
 from pythreejs import *
 import stl
 
-from ._render import render
 
-def visualize(obj, width=400, height=400, grid_unit=1, outfile=None):
-    if outfile:
-        print(outfile)
-        render(str(obj), outfile)
-        v = Visualizer(outfile)
-        r = v.create_renderer(v.create_mesh(), v.create_camera(), width=width, height=height, grid_unit=grid_unit)
-    else:
-        with tempfile.NamedTemporaryFile(suffix='.stl', delete=False) as stl_tmp_file:
-            render(str(obj), stl_tmp_file.name)
-            v = Visualizer(stl_tmp_file.name)
-            r = v.create_renderer(v.create_mesh(), v.create_camera(), width=width, height=height, grid_unit=grid_unit)
+def visualize_stl(stl_file, width=400, height=400, grid_unit=1):
+    v = Visualizer(stl_file)
+    r = v.create_renderer(v.create_mesh(), v.create_camera(), width=width, height=height, grid_unit=grid_unit)
     return r
 
 

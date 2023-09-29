@@ -14,12 +14,13 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
-from ._render import render
-from ._visualize import visualize
+from ._render import render, render_stl
+from ._visualize import visualize_stl
 
 __version__ = '0.0.1'
 
 __all__ = [
     render,
-    visualize
+    render_stl,
+    visualize_stl
 ]

@@ -23,8 +23,8 @@ To simply install the package, use pip:
 pip install git+https://github.com/jreiberkyle/jupyter_scad.git
 ```
 
-Alternately, the entire Jupyter notebook, SolidPython2, and Jupyter SCAD setup could be run as a [podman]() container.
-The podman image is given at [jupyter-scad-image]().
+Alternately, the entire Jupyter notebook, SolidPython2, and Jupyter SCAD setup could be run as a [docker](https://www.docker.com/) or [podman](https://podman.io/) container.
+The podman image is given at [image-jupyter-scad]().
 
 
 ## Usage
@@ -46,24 +46,32 @@ Note: If a 3D object description integrates an external stl file, then the stl m
 
 See the [OpenSCAD language](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual#The_OpenSCAD_Language_Reference) and [SolidPython2](https://github.com/jeff-dh/SolidPython) pages for more information on how to use these tools.
 
-### Render an OpenSCAD object to a stl
+### Render an OpenSCAD object
 
 ```python
 from jupyter_scad import render
 
-render(obj, 'cube.stl')
+render(obj)
 ```
 where `obj` is described in OpenSCAD as described above.
 
-### Visualize a stl
-
+The stl generated in rendering can also be saved by defining 'outfile':
 ```python
-from jupyter_scad import visualize
+from jupyter_scad import render
 
-visualize('cube.stl')
+render(obj, 'obj.stl')
 ```
 
-## Visualization Design
+### Visualize and then render a stl
+
+```python
+from jupyter_scad import visualize_stl, render_stl
+
+render_stl(obj, 'obj.stl')
+visualize_stl('obj.stl')
+```
+
+## Visualization
 
 This package uses [pythreejs](https://pythreejs.readthedocs.io/) for visualization.
 

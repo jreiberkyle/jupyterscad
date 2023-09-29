@@ -19,17 +19,7 @@ from pathlib import Path
 
 import pytest
 
-from jupyter_scad import _render, _visualize 
-
-
-@pytest.fixture()
-def openscad():
-    openscad = None
-    try:
-        openscad = _render.OpenSCAD()
-    except exceptions.OpenSCADException:
-        pytest.skip("OpenSCAD not detected.")
-    return openscad
+from jupyterscad import visualize_stl, _visualize
 
 
 def test_Visualizer_create_renderer(test_data):
@@ -37,7 +27,7 @@ def test_Visualizer_create_renderer(test_data):
     v.create_renderer(v.create_mesh(), v.create_camera())
 
 
-def test_visualize_success(test_data):
-    _visualize.visualize('cube([60,20,10],center=true);')
+def test_visualize_stl_success(test_data):
+    visualize_stl(test_data('test.stl'))
 
 

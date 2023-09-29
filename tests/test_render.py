@@ -19,7 +19,7 @@ from pathlib import Path
 
 import pytest
 
-from jupyter_scad import exceptions, _render
+from jupyterscad import exceptions, _render, render_stl, render
 
 LOGGER = logging.getLogger(__name__)
 
@@ -98,12 +98,17 @@ def test_OpenSCAD_render_invalid_scad(tmp_path, openscad):
         openscad.render(input_scad_file, output_file)
 
 
-def test_render(tmp_path):
+def test_render_stl(tmp_path, openscad):
     output_file = tmp_path / 'test.stl'
-
+    
     openscad_str = 'cube([60,20,10],center=true);'
-    _render.render(openscad_str, output_file)
+    render_stl(openscad_str, output_file)
 
     # make sure its a legitimate stl
     assert 'vertex' in open(output_file, 'r').read()
+
+
+def test_render_success(openscad):
+    openscad_str = 'cube([60,20,10],center=true);'
+    render(openscad_str)
 
