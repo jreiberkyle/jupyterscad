@@ -11,7 +11,7 @@ SolidPython2 generates [OpenSCAD language](https://en.wikibooks.org/wiki/OpenSCA
 To simply install the package, use pip:
 
 ```
-pip install git+https://github.com/jreiberkyle/jupyterscad.git
+pip install jupyterscad
 ```
 
 Alternatively, use [container-jupyterscad](https://github.com/jreiberkyle/container-jupyterscad) to run Jupyter SCAD and a pinned version
@@ -26,12 +26,12 @@ An OpenSCAD object can be defined using SolidPython2 or OpenSCAD.
 #### SolidPython2
 ```python
 from solid2 import *
-obj = cube(1)
+obj = cube([1.5,2,1],center=True)
 ```
 
 #### OpenSCAD
 ```python
-obj = 'cube([60,20,10],center=true);'
+obj = 'cube([1.5,2,1],center=true);'
 ```
 
 Note: If a 3D object description integrates an external stl file, then the stl must be in the same directory as the notebook running the code.
@@ -46,6 +46,8 @@ from jupyter_scad import render
 render(obj)
 ```
 where `obj` is described in OpenSCAD as described above.
+
+![render example](images/render_cube.png)
 
 The stl generated in rendering can also be saved by defining 'outfile':
 ```python
@@ -72,7 +74,7 @@ As an alternative to Jupyter SCAD, one could use a Jupyter notebook as an extern
 The benefit to this approach is that one can visualize the preview. The drawback is that the two-program workflow can feel distracting.
 See more on using external editors for OpenSCAD [here](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_an_external_Editor_with_OpenSCAD).
 
-Or, one can use [ViewSCAD](https://github.com/nickc92/ViewSCAD), which was the motivation for this project. However the last time ViewSCAD was updated was 2015 (checked on 9/21/2023). It only supports SolidPython, not SolidPython2.
+Or, one can use [ViewSCAD](https://github.com/nickc92/ViewSCAD), which was the motivation for this project. However the last time ViewSCAD was updated was 2019 (checked on 9/21/2023). It only supports SolidPython, not SolidPython2.
 
 ## Transitioning from ViewSCAD
 
