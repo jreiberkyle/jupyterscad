@@ -47,7 +47,7 @@ render(obj)
 ```
 where `obj` is described in OpenSCAD as described above.
 
-![render example](images/render_cube.png)
+![render example](https://github.com/jreiberkyle/jupyterscad/blob/main/images/render_cube.png?raw=True)
 
 The stl generated in rendering can also be saved by defining 'outfile':
 ```python
