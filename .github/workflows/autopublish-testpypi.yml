@@ -1,7 +1,9 @@
-name: Publish to TestPyPi
+name: Autopublish to TestPyPi
 
 on:
-  workflow_dispatch
+  push:
+    tags:
+      - '*'
 
 jobs:
   publish:
