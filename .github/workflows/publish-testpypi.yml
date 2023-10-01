@@ -1,0 +1,43 @@
+name: Publish to TestPyPi
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Build, verify, & upload package to PyPi
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/jupyterscad
+
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Pip cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip
+          restore-keys: |
+            ${{ runner.os }}-pip
+
+      - name: Build
+        run: |
+          pip install --upgrade nox
+          nox -s build
+
+    - name: Publish distribution 📦 to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
