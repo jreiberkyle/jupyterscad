@@ -25,7 +25,7 @@ nox.options.stop_on_first_error = True
 nox.options.reuse_existing_virtualenvs = False
 
 
-@nox.session(python=["3.11"])
+@nox.session(python=["3.8", "3.9", "3.11", "3.12"])
 def test(session):
     session.install(".[test]")
 
