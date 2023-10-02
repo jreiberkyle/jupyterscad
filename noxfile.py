@@ -19,10 +19,12 @@ import shutil
 
 import nox
 
-BUILD_DIRS = ['build', 'dist']
+BUILD_DIRS = ["build", "dist"]
 
 nox.options.stop_on_first_error = True
 nox.options.reuse_existing_virtualenvs = False
+
+nox.options.sessions = ["format", "lint", "test"]
 
 
 @nox.session(python=["3.8", "3.9", "3.10", "3.11", "3.12"])
@@ -30,11 +32,39 @@ def test(session):
     session.install(".[test]")
 
     options = session.posargs
-    session.run('python',
-                '-m',
-                'pytest',
-                '-v',
-                *options)
+    session.run("python", "-m", "pytest", "-v", *options)
+
+
+@nox.session
+def format(session):
+    errors = []
+
+    session.install("isort")
+    try:
+        session.run("python", "-m", "isort", "--check-only", "src")
+    except nox.command.CommandFailed:
+        errors.append(
+            "isort check failed. Pip install isort then run 'python -m isort src' to format files"
+        )
+
+    session.install("black")
+    try:
+        session.run("python", "-m", "black", "--check", "src")
+    except nox.command.CommandFailed:
+        errors.append(
+            "Black check failed. Pip install black then run 'python -m black src' to format files"
+        )
+
+    if errors:
+        session.error(f"The following format error(s) occurred: {errors}")
+
+
+@nox.session
+def lint(session):
+    session.install("flake8")
+
+    session.run("flake8", "src")
+
 
 @nox.session
 def build(session):
@@ -42,13 +72,15 @@ def build(session):
     # check preexisting
     exist_but_should_not = [p for p in BUILD_DIRS if Path(p).is_dir()]
     if exist_but_should_not:
-        session.error(f"Pre-existing {', '.join(exist_but_should_not)}. "
-                      "Run clean session and try again")
+        session.error(
+            f"Pre-existing {', '.join(exist_but_should_not)}. "
+            "Run clean session and try again"
+        )
 
-    session.install('build', 'twine', 'check-wheel-contents')
+    session.install("build", "twine", "check-wheel-contents")
 
-    session.run(*'python -m build --sdist --wheel'.split())
-    session.run('check-wheel-contents', 'dist')
+    session.run(*"python -m build --sdist --wheel".split())
+    session.run("check-wheel-contents", "dist")
 
 
 @nox.session
@@ -62,13 +94,13 @@ def clean(session):
 @nox.session
 def publish_testpypi(session):
     """Publish to TestPyPi using API token"""
-    _publish(session, 'testpypi')
+    _publish(session, "testpypi")
 
 
 @nox.session
 def publish_pypi(session):
     """Publish to PyPi using API token"""
-    _publish(session, 'pypi')
+    _publish(session, "pypi")
 
 
 def _publish(session, repository):
@@ -76,14 +108,11 @@ def _publish(session, repository):
     if missing:
         session.error(
             f"Missing one or more build directories: {', '.join(missing)}. "
-            "Run build session and try again")
+            "Run build session and try again"
+        )
 
-    session.install('twine')
+    session.install("twine")
 
-    files = [str(f) for f in Path('dist').iterdir()]
+    files = [str(f) for f in Path("dist").iterdir()]
     session.run("twine", "check", *files)
-    session.run("twine",
-                "upload",
-                f"--repository={repository}",
-                '-u=__token__',
-                *files)
+    session.run("twine", "upload", f"--repository={repository}", "-u=__token__", *files)

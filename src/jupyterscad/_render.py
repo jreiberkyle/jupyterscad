@@ -15,50 +15,53 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
-from pathlib import Path
 import platform
 import subprocess
 import tempfile
-import typing
+from pathlib import Path
 
-from .exceptions import OpenSCADException
 from ._visualize import visualize_stl
+from .exceptions import OpenSCADException
 
 DEFAULT_OPENSCAD_EXECUTABLE = {
-    'Linux': ['/usr/bin/openscad', '/usr/local/bin/openscad'],
-    'Darwin': ['/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD']
+    "Linux": ["/usr/bin/openscad", "/usr/local/bin/openscad"],
+    "Darwin": ["/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD"],
 }
 
 LOGGER = logging.getLogger(__name__)
 
 
-def render(obj, width=400, height=400, grid_unit=1, outfile=None, openscad_exec: Path = None):
+def render(
+    obj, width=400, height=400, grid_unit=1, outfile=None, openscad_exec: Path = None
+):
     if outfile:
         render_stl(str(obj), outfile, openscad_exec=openscad_exec)
         r = visualize_stl(outfile, width=width, height=height, grid_unit=grid_unit)
     else:
-        with tempfile.NamedTemporaryFile(suffix='.stl', delete=False) as stl_tmp_file:
+        with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as stl_tmp_file:
             render_stl(str(obj), stl_tmp_file.name, openscad_exec=openscad_exec)
-            r = visualize_stl(stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit)
+            r = visualize_stl(
+                stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit
+            )
     return r
 
 
 def render_stl(obj, output_file, openscad_exec: Path = None):
-    
-    with tempfile.NamedTemporaryFile(suffix='.scad', delete=False) as scad_tmp_file:
-        with open(scad_tmp_file.name, 'w') as fp:
+    with tempfile.NamedTemporaryFile(suffix=".scad", delete=False) as scad_tmp_file:
+        with open(scad_tmp_file.name, "w") as fp:
             fp.write(str(obj))
 
         OpenSCAD(openscad_exec).render(scad_tmp_file.name, output_file)
 
 
-class OpenSCAD():
+class OpenSCAD:
     def __init__(self, openscad_exec: Path = None):
         if openscad_exec:
             if not self._is_executable(openscad_exec):
                 raise OpenSCADException(
-                    f'Provided path to openscad executable ({openscad_exec}) does not '
-                    'exist.')
+                    f"Provided path to openscad executable ({openscad_exec}) does not "
+                    "exist."
+                )
             self.executable = openscad_exec
         else:
             self.executable = self._detect_executable()
@@ -71,26 +74,29 @@ class OpenSCAD():
             default_paths = DEFAULT_OPENSCAD_EXECUTABLE[system]
         except KeyError:  # system not supported
             raise OpenSCADException(
-                    f'This system ({system}) is not supported for '
-                    'OpenSCAD executable autodetect. Please specify the path '
-                    'to the OpenSCAD executable.')
+                f"This system ({system}) is not supported for "
+                "OpenSCAD executable autodetect. Please specify the path "
+                "to the OpenSCAD executable."
+            )
         else:
             for test_path in default_paths:
                 if cls._is_executable(test_path):
                     LOGGER.debug(
-                            f'executable path ({test_path}) found for '
-                            f'system ({system}).')
+                        f"executable path ({test_path}) found for "
+                        f"system ({system})."
+                    )
                     detected_executable = Path(test_path)
                     break
-        
+
             if not detected_executable:
                 raise OpenSCADException(
-                        'OpenSCAD executable not found at the default '
-                        f'locations for this system ({system}), '
-                        f'{DEFAULT_OPENSCAD_EXECUTABLE[system]}. '
-                        'Please specify the path to the OpenSCAD '
-                        'executable.')
-    
+                    "OpenSCAD executable not found at the default "
+                    f"locations for this system ({system}), "
+                    f"{DEFAULT_OPENSCAD_EXECUTABLE[system]}. "
+                    "Please specify the path to the OpenSCAD "
+                    "executable."
+                )
+
         return detected_executable
 
     @staticmethod
@@ -98,8 +104,8 @@ class OpenSCAD():
         return Path(path).is_file()
 
     def render(self, scad_file, output_file):
-        '''Generate stl from scad'''
-        cmd = [self.executable, '-o', output_file, scad_file]
+        """Generate stl from scad"""
+        cmd = [self.executable, "-o", output_file, scad_file]
         LOGGER.info(cmd)
         try:
             subprocess.run(cmd, check=True, capture_output=True, text=True)

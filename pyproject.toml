@@ -40,6 +40,9 @@ filterwarnings = [
     'ignore:Sentinel:DeprecationWarning'
 ]
 
+[tool.isort]
+profile = "black"
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
