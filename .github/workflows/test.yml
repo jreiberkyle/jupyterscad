@@ -6,19 +6,13 @@ jobs:
   format:
     name: Check Format
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
-        allow-prereleases: true
+        python-version: 3.8
     - name: Pip cache
       uses: actions/cache@v2
       with:
@@ -34,19 +28,13 @@ jobs:
   lint:
     name: Check Linting
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
-        allow-prereleases: true
+        python-version: 3.8
     - name: Pip cache
       uses: actions/cache@v2
       with:
@@ -62,11 +50,9 @@ jobs:
   test:
     name: Test Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
