@@ -32,8 +32,35 @@ LOGGER = logging.getLogger(__name__)
 
 
 def render(
-    obj, width=400, height=400, grid_unit=1, outfile=None, openscad_exec: Path = None
+    obj,
+    width: int = 400,
+    height: int = 400,
+    grid_unit: float = 1,
+    outfile: str = None,
+    openscad_exec: Path = None,
 ):
+    """Render a visusualization of an OpenSCAD object.
+
+    Typical usage example:
+
+      obj = cube(3)
+      r = render(obj)
+      display(r)
+
+    Args:
+        obj: OpenSCAD object to visualize.
+        width: Visualization pixel width on page.
+        height: Visualization pixel height on page.
+        grid_unit: Grid cell size.
+        outfile: Name of stl file to generate. No stl file is generated if None.
+        openscad_exec: Path to openscad executable.
+
+    Returns:
+        Rendering to be displayed.
+
+    Raises:
+        OpenSCADException: An error occurred running OpenSCAD.
+    """
     if outfile:
         render_stl(str(obj), outfile, openscad_exec=openscad_exec)
         r = visualize_stl(outfile, width=width, height=height, grid_unit=grid_unit)
@@ -47,6 +74,21 @@ def render(
 
 
 def render_stl(obj, output_file, openscad_exec: Path = None):
+    """Render a stl from an OpenSCAD object.
+
+    Typical usage example:
+
+      obj = cube(3)
+      render_stl(obj, outfile='cube.stl')
+
+    Args:
+        obj: OpenSCAD object to visualize.
+        outfile: Name of stl file to generate. No stl file is generated if None.
+        openscad_exec: Path to openscad executable.
+
+    Raises:
+        OpenSCADException: An error occurred running OpenSCAD.
+    """
     with tempfile.NamedTemporaryFile(suffix=".scad", delete=False) as scad_tmp_file:
         with open(scad_tmp_file.name, "w") as fp:
             fp.write(str(obj))

@@ -21,7 +21,25 @@ import pythreejs as pjs
 import stl
 
 
-def visualize_stl(stl_file, width=400, height=400, grid_unit=1):
+def visualize_stl(
+    stl_file: str, width: int = 400, height: int = 400, grid_unit: float = 1
+):
+    """Render a visualization of a stl.
+
+    Typical usage example:
+
+      r = render('cube.stl')
+      display(r)
+
+    Args:
+        stl_file: stl file to visualize.
+        width: Visualization pixel width on page.
+        height: Visualization pixel height on page.
+        grid_unit: Grid cell size.
+
+    Returns:
+        Rendering to be displayed.
+    """
     v = Visualizer(stl_file)
     r = v.create_renderer(
         v.create_mesh(),
