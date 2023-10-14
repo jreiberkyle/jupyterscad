@@ -68,6 +68,80 @@ visualize_stl('obj.stl')
 These separate steps allow for generating an stl from an OpenSCAD object without
 visualization or visualizing an existing stl.
 
+### API Docs
+
+#### render
+
+    render(
+        obj,
+        width: int = 400,
+        height: int = 400,
+        grid_unit: float = 1,
+        outfile: str = None,
+        openscad_exec: Path = None,
+    )
+
+    Render a visusualization of an OpenSCAD object.
+
+    Typical usage example:
+
+      obj = cube(3)
+      r = render(obj)
+      display(r)
+
+    Args:
+        obj: OpenSCAD object to visualize.
+        width: Visualization pixel width on page.
+        height: Visualization pixel height on page.
+        grid_unit: Grid cell size.
+        outfile: Name of stl file to generate. No stl file is generated if None.
+        openscad_exec: Path to openscad executable.
+
+    Returns:
+        Rendering to be displayed.
+
+    Raises:
+        OpenSCADException: An error occurred running OpenSCAD.
+
+#### render_stl
+    render_stl(obj, output_file, openscad_exec: Path = None)
+
+    Render a stl from an OpenSCAD object.
+
+    Typical usage example:
+
+      obj = cube(3)
+      render_stl(obj, outfile='cube.stl')
+
+    Args:
+        obj: OpenSCAD object to visualize.
+        outfile: Name of stl file to generate. No stl file is generated if None.
+        openscad_exec: Path to openscad executable.
+
+    Raises:
+        OpenSCADException: An error occurred running OpenSCAD.
+
+#### visualize_stl
+    visualize_stl(
+      stl_file: str, width: int = 400, height: int = 400, grid_unit: float = 1
+    )
+
+    Render a visualization of a stl.
+
+    Typical usage example:
+
+      r = render('cube.stl')
+      display(r)
+
+    Args:
+        stl_file: stl file to visualize.
+        width: Visualization pixel width on page.
+        height: Visualization pixel height on page.
+        grid_unit: Grid cell size.
+
+    Returns:
+        Rendering to be displayed.
+
 ## Alternatives
 
 As an alternative to Jupyter SCAD, one could use a Jupyter notebook as an external editor, using SolidPython2 to update the SCAD file and OpenSCAD to visualize and render the SCAD file.
