@@ -2,7 +2,7 @@
 
 Jupyter SCAD renders and interactively visualizes 3D objects described in [SolidPython2](https://github.com/jeff-dh/SolidPython) within a Jupyter notebook.
 
-This program is focused on the use case of generating stl files with Python interactively within a Jupyter notebook.
+This program is focused on the use case of generating stl files with Python (aka SolidPython2) interactively within a Jupyter notebook.
 
 SolidPython2 generates [OpenSCAD language](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual#The_OpenSCAD_Language_Reference) code from Python code. Jupyter SCAD then uses [OpenSCAD](https://openscad.org) to render the OpenSCAD code to a 3D model and provides interactive visualization. As an alternative to SolidPython2, the OpenSCAD code can also be provided directly.
 
@@ -25,7 +25,7 @@ An OpenSCAD object can be defined using SolidPython2 or OpenSCAD.
 
 #### SolidPython2
 ```python
-from solid2 import *
+from solid2 import cube
 obj = cube([1.5,2,1],center=True)
 ```
 
@@ -41,7 +41,7 @@ See the [OpenSCAD language](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual#T
 ### Render an OpenSCAD object
 
 ```python
-from jupyter_scad import render
+from jupyterscad import render
 
 render(obj)
 ```
@@ -51,22 +51,22 @@ where `obj` is described in OpenSCAD as described above.
 
 The stl generated in rendering can also be saved by defining 'outfile':
 ```python
-from jupyter_scad import render
-
 render(obj, outfile='obj.stl')
 ```
 
 ### Visualize and then Render a stl
 
 ```python
-from jupyter_scad import visualize_stl, render_stl
+from jupyterscad import visualize_stl, render_stl
 
 render_stl(obj, 'obj.stl')
 visualize_stl('obj.stl')
 ```
 
 These separate steps allow for generating an stl from an OpenSCAD object without
-visualization or visualizing an existing stl.
+visualization or visualizing an existing stl. This is an example only, usually
+these steps would not be run together. To generate a stl while also visualizing
+the stl, use `render` with `outfile` specified.
 
 ### API Docs
 
