@@ -106,22 +106,24 @@ class Visualizer:
         scene.add(pjs.AxesHelper(max(self.stl_mesh.max_ * 2)))
 
     def add_grid(self, scene, unit=1):
-        mesh = self.stl_mesh
-        min_ = np.minimum(np.floor(mesh.min_), np.array([0, 0, 0]))
-        max_ = np.maximum(np.ceil(mesh.max_), np.array([0, 0, 0]))
-        extent = max_ - min_
-        grid_extent = extent.max()
+        def roundToUnits(x):
+            return round(x /unit) * unit
+
+        min_ = np.minimum(self.stl_mesh.min_, np.array([0, 0, 0]))
+        max_ = np.maximum(self.stl_mesh.max_, np.array([0, 0, 0]))
+        max_extend = (max_ - min_).max()
+        grid_extent = roundToUnits(max_extend) + 2 * unit
 
         grid_pos = (
-            grid_extent / 2 + min_[0],
-            grid_extent / 2 + min_[1],
-            grid_extent / 2 + min_[2],
+            grid_extent / 2 - unit + roundToUnits(min_[0]),
+            grid_extent / 2 - unit + roundToUnits(min_[1]),
+            grid_extent / 2 - unit + roundToUnits(min_[2]),
         )
 
         # X/Z plane
         gh = pjs.GridHelper(
-            grid_extent + 2 * unit,
-            (grid_extent + 2 * unit) / unit,
+            grid_extent,
+            grid_extent / unit,
             colorCenterLine="blue",
             colorGrid="blue",
         )
@@ -130,8 +132,8 @@ class Visualizer:
 
         # X/Y plane
         gh = pjs.GridHelper(
-            grid_extent + 2 * unit,
-            (grid_extent + 2 * unit) / unit,
+            grid_extent,
+            grid_extent / unit,
             colorCenterLine="red",
             colorGrid="red",
         )
@@ -141,8 +143,8 @@ class Visualizer:
 
         # Y/Z plane
         gh = pjs.GridHelper(
-            grid_extent + 2 * unit,
-            (grid_extent + 2 * unit) / unit,
+            grid_extent,
+            grid_extent / unit,
             colorCenterLine="green",
             colorGrid="green",
         )
