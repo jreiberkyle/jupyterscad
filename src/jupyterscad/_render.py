@@ -20,7 +20,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from ._visualize import visualize_stl
+from ._visualize import visualize_stl, GRID_AUTO_UNIT
 from .exceptions import OpenSCADException
 
 DEFAULT_OPENSCAD_EXECUTABLE = {
@@ -35,7 +35,7 @@ def render(
     obj,
     width: int = 400,
     height: int = 400,
-    grid_unit: float = 1,
+    grid_unit: float = GRID_AUTO_UNIT,
     outfile: str = None,
     openscad_exec: Path = None,
 ):
