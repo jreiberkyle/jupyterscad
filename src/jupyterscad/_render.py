@@ -16,6 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 import platform
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
@@ -106,7 +107,11 @@ class OpenSCAD:
                 )
             self.executable = openscad_exec
         else:
-            self.executable = self._detect_executable()
+            self.executable = (
+                shutil.which("openscad")
+                or shutil.which("OpenSCAD")
+                or self._detect_executable()
+            )
 
     @classmethod
     def _detect_executable(cls) -> Path:
