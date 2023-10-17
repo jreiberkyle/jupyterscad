@@ -20,8 +20,6 @@ import numpy as np
 import pythreejs as pjs
 import stl
 
-GRID_AUTO_UNIT = -1
-
 
 def visualize_stl(
     stl_file: str, width: int = 400, height: int = 400, grid_unit: float = 1
@@ -115,7 +113,7 @@ class Visualizer:
         max_ = np.maximum(self.stl_mesh.max_, np.array([0, 0, 0]))
         max_extend = (max_ - min_).max()
 
-        if unit == GRID_AUTO_UNIT:
+        if unit == -1:
             unit = 10 ** math.floor(math.log10(max_extend))
 
         grid_extent = roundToUnits(max_extend) + 2 * unit
