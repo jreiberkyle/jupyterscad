@@ -35,7 +35,7 @@ def visualize_stl(
         stl_file: stl file to visualize.
         width: Visualization pixel width on page.
         height: Visualization pixel height on page.
-        grid_unit: Grid cell size.
+        grid_unit: Grid cell size, 0 to disable, -1 for automatic
 
     Returns:
         Rendering to be displayed.
