@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Grid was not aligned with origin for grid_unit != 1 (#11). Thank you @jeff-dh!
 - README references to jupter_scad should be jupyterscad
 
 ## [0.1.0] - 2023-10-01
