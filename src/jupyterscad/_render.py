@@ -20,7 +20,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from ._visualize import visualize_stl, GRID_AUTO_UNIT
+from ._visualize import GRID_AUTO_UNIT, visualize_stl
 from .exceptions import OpenSCADException
 
 DEFAULT_OPENSCAD_EXECUTABLE = {
