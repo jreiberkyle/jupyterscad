@@ -107,7 +107,7 @@ class Visualizer:
 
     def add_grid(self, scene, unit=1):
         def roundToUnits(x):
-            return round(x /unit) * unit
+            return round(x / unit) * unit
 
         min_ = np.minimum(self.stl_mesh.min_, np.array([0, 0, 0]))
         max_ = np.maximum(self.stl_mesh.max_, np.array([0, 0, 0]))
