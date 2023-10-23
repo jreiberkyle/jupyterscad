@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install code
-        uses: pip install .
+        run: pip install .
 
       - name: Render stl
         run: python -c "from jupyterscad import render_stl; render_stl('cube([3,3,3]);', 'output.stl')"
@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install code
-        uses: pip install .
+        run: pip install .
 
       - name: Render stl
         run: python -c "from jupyterscad import render_stl; render_stl('cube([3,3,3]);', 'output.stl')"
@@ -62,7 +62,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install code
-        uses: pip install .
+        run: pip install .
 
       - name: Render stl
         run: python -c "from jupyterscad import render_stl; render_stl('cube([3,3,3]);', 'output.stl')"
