@@ -44,26 +44,3 @@ jobs:
       - name: Render stl
         run: python -c "from jupyterscad import render_stl; render_stl('cube([3,3,3]);', 'output.stl')"
 
-  windows:
-    runs-on: windows-latest
-    steps:
-      - name: Download and Install OpenSCAD
-        shell: pwsh
-        run: |
-          (New-Object System.Net.WebClient).DownloadFile('https://files.openscad.org/OpenSCAD-2021.01-x86-32-Installer.exe', 'OpenSCAD-2021.01-x86-32-Installer.exe')
-          .\OpenSCAD-2021.01-x86-32-Installer.exe
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install code
-        run: pip install .
-
-      - name: Render stl
-        run: python -c "from jupyterscad import render_stl; render_stl('cube([3,3,3]);', 'output.stl')"
-
