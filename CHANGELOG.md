@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Grid was not aligned with origin for grid_unit != 1 (#11). Thank you @jeff-dh!
 - README references to jupter_scad should be jupyterscad
 
+## Changed
+
+- OpenSCAD executable discovery now looks in PATH (which works for Linux) then
+  in the macOS-specific install path if not found in PATH
+
 ## [0.1.0] - 2023-10-01
 
 ### Added
