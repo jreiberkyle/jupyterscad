@@ -24,13 +24,6 @@ from .exceptions import OpenSCADException
 
 LOGGER = logging.getLogger(__name__)
 
-OS_OPENSCAD_EXECUTABLES = {
-    "/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD",  # macOS
-    os.path.join(
-        os.environ.get("Programfiles", "C:"), "OpenSCAD", "openscad.exe"
-    ),  # 64-bit windows
-}
-
 
 def process(scad_file, output_file, executable: Path = None):
     """Generate stl from scad using OpenSCAD executable"""
@@ -51,21 +44,22 @@ def process(scad_file, output_file, executable: Path = None):
 def detect_executable() -> Path:
     """Detect the OpenSCAD executable"""
 
-    detected_executable = which("openscad")
-
-    if detected_executable:
-        LOGGER.debug(f"Executable path ({detected_executable}) found.")
-    else:
-        for test_path in OS_OPENSCAD_EXECUTABLES:
-            if Path(test_path).is_file():
-                LOGGER.debug(f"Executable path ({test_path}) found.")
-                detected_executable = test_path
-                break
-
-        if not detected_executable:
-            raise OpenSCADException(
-                "OpenSCAD executable autodetection failed. "
-                "Please specify the path to the OpenSCAD executable."
+    detected_executable = (
+        which("openscad")
+        or which("/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD")  # macOS
+        or which(
+            os.path.join(
+                os.environ.get("Programfiles", "C:"), "OpenSCAD", "openscad.exe"
             )
+        )  # 64-bit windows
+    )
+
+    if not detected_executable:
+        raise OpenSCADException(
+            "OpenSCAD executable autodetection failed. "
+            "Please specify the path to the OpenSCAD executable."
+        )
+
+    LOGGER.debug(f"Executable path ({detected_executable}) found.")
 
     return Path(detected_executable)

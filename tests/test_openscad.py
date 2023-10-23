@@ -44,7 +44,6 @@ def test_invalid_openscad_exec(scad_file, output_file):
 
 def test_detect_executable_failure(monkeypatch):
     """No executable found"""
-    monkeypatch.setattr(_openscad, "OS_OPENSCAD_EXECUTABLES", [])
     monkeypatch.setattr(_openscad, "which", lambda x: None)
 
     with pytest.raises(exceptions.OpenSCADException):
