@@ -15,7 +15,6 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
-import os
 import subprocess
 from pathlib import Path
 from shutil import which
@@ -46,12 +45,8 @@ def detect_executable() -> Path:
 
     detected_executable = (
         which("openscad")
-        or which("/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD")  # macOS
-        or which(
-            os.path.join(
-                os.environ.get("Programfiles", "C:"), "OpenSCAD", "openscad.exe"
-            )
-        )  # 64-bit windows
+        or which("openscad", path="/Applications/OpenSCAD.app/Contents/MacOS")  # macOS
+        or which("openscad", path=r"C:\Program Files\OpenSCAD")  # 64-bit windows
     )
 
     if not detected_executable:
