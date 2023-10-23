@@ -27,7 +27,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-test = ["pytest"]
+test = ["pytest", "solidpython2"]
 
 [project.urls]
 Homepage = "https://github.com/jreiberkyle/jupyterscad"
