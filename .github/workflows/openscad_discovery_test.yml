@@ -1,4 +1,4 @@
-name: test_openscad_discovery
+name: Openscad Discovery Test
 
 on:
   workflow_dispatch
