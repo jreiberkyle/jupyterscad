@@ -43,10 +43,9 @@ def process(scad_file, output_file, executable: Path = None):
 def detect_executable() -> Path:
     """Detect the OpenSCAD executable"""
 
-    detected_executable = (
-        which("openscad")
-        or which("openscad", path="/Applications/OpenSCAD.app/Contents/MacOS")  # macOS
-    )
+    detected_executable = which("openscad") or which(
+        "openscad", path="/Applications/OpenSCAD.app/Contents/MacOS"
+    )  # macOS
 
     if not detected_executable:
         raise OpenSCADException(
