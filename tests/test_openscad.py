@@ -44,7 +44,7 @@ def test_invalid_openscad_exec(scad_file, output_file):
 
 def test_detect_executable_failure(monkeypatch):
     """No executable found"""
-    monkeypatch.setattr(_openscad, "which", lambda x: None)
+    monkeypatch.setattr(_openscad, "which", lambda x, path=None: None)
 
     with pytest.raises(exceptions.OpenSCADException):
         _openscad.detect_executable()
@@ -52,7 +52,7 @@ def test_detect_executable_failure(monkeypatch):
 
 def test_detect_executable_success(monkeypatch, tmp_path):
     """The default executable exists"""
-    monkeypatch.setattr(_openscad, "which", lambda x: "found")
+    monkeypatch.setattr(_openscad, "which", lambda x, path=None: "found")
     _openscad.detect_executable()
 
 
