@@ -15,7 +15,6 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
-from pathlib import Path
 
 import pytest
 
@@ -43,10 +42,9 @@ def test_invalid_openscad_exec(scad_file, output_file):
         _openscad.process(scad_file, output_file, "invalid")
 
 
-def test_detect_executable_notsupported(monkeypatch):
-    """What happens when the detected system is not one that provides a
-    default"""
-    monkeypatch.setattr(_openscad.platform, "system", lambda: "NotSupported")
+def test_detect_executable_failure(monkeypatch):
+    """No executable found"""
+    monkeypatch.setattr(_openscad, "OS_OPENSCAD_EXECUTABLES", [])
     monkeypatch.setattr(_openscad, "which", lambda x: None)
 
     with pytest.raises(exceptions.OpenSCADException):
@@ -57,21 +55,6 @@ def test_detect_executable_success(monkeypatch, tmp_path):
     """The default executable exists"""
     monkeypatch.setattr(_openscad, "which", lambda x: "found")
     _openscad.detect_executable()
-
-
-def test_detect_executable_failure(monkeypatch, tmp_path):
-    """The default executable does not exist"""
-    monkeypatch.setattr(_openscad.platform, "system", lambda: "Linux")
-    monkeypatch.setattr(_openscad, "which", lambda x: None)
-
-    fake_path = tmp_path / "executable"
-
-    monkeypatch.setattr(
-        _openscad, "DEFAULT_OPENSCAD_EXECUTABLE", {"Linux": [str(fake_path)]}
-    )
-
-    with pytest.raises(exceptions.OpenSCADException):
-        _openscad.detect_executable()
 
 
 @pytest.fixture()

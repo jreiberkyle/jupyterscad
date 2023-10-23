@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
-import platform
+import os
 import subprocess
 from pathlib import Path
 from shutil import which
@@ -24,9 +24,11 @@ from .exceptions import OpenSCADException
 
 LOGGER = logging.getLogger(__name__)
 
-DEFAULT_OPENSCAD_EXECUTABLE = {
-    "Linux": ["/usr/bin/openscad", "/usr/local/bin/openscad"],
-    "Darwin": ["/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD"],
+OS_OPENSCAD_EXECUTABLES = {
+    "/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD",  # macOS
+    os.path.join(
+        os.environ.get("Programfiles", "C:"), "OpenSCAD", "openscad.exe"
+    ),  # 64-bit windows
 }
 
 
@@ -54,32 +56,16 @@ def detect_executable() -> Path:
     if detected_executable:
         LOGGER.debug(f"Executable path ({detected_executable}) found.")
     else:
-        system = platform.system()
-        try:
-            default_paths = DEFAULT_OPENSCAD_EXECUTABLE[system]
-        except KeyError:  # system not supported
-            raise OpenSCADException(
-                f"This system ({system}) is not supported for "
-                "OpenSCAD executable autodetect. Please specify the path "
-                "to the OpenSCAD executable."
-            )
-        else:
-            for test_path in default_paths:
-                if Path(test_path).is_file():
-                    LOGGER.debug(
-                        f"Executable path ({test_path}) found for "
-                        f"system ({system})."
-                    )
-                    detected_executable = test_path
-                    break
+        for test_path in OS_OPENSCAD_EXECUTABLES:
+            if Path(test_path).is_file():
+                LOGGER.debug(f"Executable path ({test_path}) found.")
+                detected_executable = test_path
+                break
 
-            if not detected_executable:
-                raise OpenSCADException(
-                    "OpenSCAD executable not found at the default "
-                    f"locations for this system ({system}), "
-                    f"{DEFAULT_OPENSCAD_EXECUTABLE[system]}. "
-                    "Please specify the path to the OpenSCAD "
-                    "executable."
-                )
+        if not detected_executable:
+            raise OpenSCADException(
+                "OpenSCAD executable autodetection failed. "
+                "Please specify the path to the OpenSCAD executable."
+            )
 
     return Path(detected_executable)
