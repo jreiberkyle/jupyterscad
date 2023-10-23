@@ -21,12 +21,14 @@ import pytest
 
 LOGGER = logging.getLogger(__name__)
 
-TEST_DATA_PATH = Path(__file__).parent.absolute() / 'data'
+TEST_DATA_PATH = Path(__file__).parent.absolute() / "data"
 
 
 @pytest.fixture
 def test_data():
     LOGGER.info(TEST_DATA_PATH)
+
     def f(filename):
         return TEST_DATA_PATH / filename
+
     return f

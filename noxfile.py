@@ -41,18 +41,20 @@ def format(session):
 
     session.install("isort")
     try:
-        session.run("python", "-m", "isort", "--check-only", "src")
+        session.run("python", "-m", "isort", "--check-only", "src", "tests")
     except nox.command.CommandFailed:
         errors.append(
-            "isort check failed. Pip install isort then run 'python -m isort src' to format files"
+            "isort check failed. Pip install isort then run "
+            "'python -m isort src tests' to format files"
         )
 
     session.install("black")
     try:
-        session.run("python", "-m", "black", "--check", "src")
+        session.run("python", "-m", "black", "--check", "src", "tests")
     except nox.command.CommandFailed:
         errors.append(
-            "Black check failed. Pip install black then run 'python -m black src' to format files"
+            "Black check failed. Pip install black then run "
+            "'python -m black src tests' to format files"
         )
 
     if errors:

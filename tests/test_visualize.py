@@ -19,15 +19,13 @@ from pathlib import Path
 
 import pytest
 
-from jupyterscad import visualize_stl, _visualize
+from jupyterscad import _visualize, visualize_stl
 
 
 def test_Visualizer_create_renderer(test_data):
-    v = _visualize.Visualizer(test_data('test.stl'))
+    v = _visualize.Visualizer(test_data("test.stl"))
     v.create_renderer(v.create_mesh(), v.create_camera())
 
 
 def test_visualize_stl_success(test_data):
-    visualize_stl(test_data('test.stl'))
-
-
+    visualize_stl(test_data("test.stl"))
