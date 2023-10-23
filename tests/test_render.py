@@ -45,7 +45,7 @@ def test_render_stl(obj, tmp_path, monkeypatch):
 def test_render_success(monkeypatch):
     mock_visualize_stl = Mock()
     monkeypatch.setattr(_render, "visualize_stl", mock_visualize_stl)
-    monkeypatch.setattr(_render, "render", Mock())
+    monkeypatch.setattr(_render, "render_stl", Mock())
 
     render(solid2.cube(3))
     mock_visualize_stl.assert_called_once()
