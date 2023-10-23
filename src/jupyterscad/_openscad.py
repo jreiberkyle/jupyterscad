@@ -46,7 +46,6 @@ def detect_executable() -> Path:
     detected_executable = (
         which("openscad")
         or which("openscad", path="/Applications/OpenSCAD.app/Contents/MacOS")  # macOS
-        or which("openscad", path=r"C:\Program Files\OpenSCAD")  # 64-bit windows
     )
 
     if not detected_executable:
