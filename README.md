@@ -77,8 +77,8 @@ the stl, use `render` with `outfile` specified.
         width: int = 400,
         height: int = 400,
         grid_unit: float = 1,
-        outfile: str = None,
-        openscad_exec: Path = None,
+        outfile: Optional[Union[str, PathLike]] = None,
+        openscad_exec: Optional[Union[str, PathLike]] = None,
     )
 
     Render a visusualization of an OpenSCAD object.
@@ -104,7 +104,11 @@ the stl, use `render` with `outfile` specified.
         OpenSCADException: An error occurred running OpenSCAD.
 
 #### render_stl
-    render_stl(obj, output_file, openscad_exec: Path = None)
+    render_stl(
+        obj,
+        output_file: Union[str, PathLike],
+        openscad_exec: Optional[Union[str, PathLike]] = None,
+    )
 
     Render a stl from an OpenSCAD object.
 
@@ -123,7 +127,10 @@ the stl, use `render` with `outfile` specified.
 
 #### visualize_stl
     visualize_stl(
-      stl_file: str, width: int = 400, height: int = 400, grid_unit: float = 1
+        stl_file: Union[str, PathLike],
+        width: int = 400,
+        height: int = 400,
+        grid_unit: float = 1,
     )
 
     Render a visualization of a stl.
@@ -141,6 +148,7 @@ the stl, use `render` with `outfile` specified.
 
     Returns:
         Rendering to be displayed.
+
 
 ## Alternatives
 

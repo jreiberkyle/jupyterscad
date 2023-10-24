@@ -16,20 +16,25 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 import subprocess
+from os import PathLike
 from pathlib import Path
 from shutil import which
+from typing import Optional, Union
 
 from .exceptions import OpenSCADException
 
 LOGGER = logging.getLogger(__name__)
 
 
-def process(scad_file, output_file, executable: Path = None):
+def process(scad_file, output_file, executable: Optional[Union[str, PathLike]] = None):
     """Generate stl from scad using OpenSCAD executable"""
-    if executable and not Path(executable).is_file():
-        raise OpenSCADException(f"Specified executable {executable} does not exist.")
-
-    if not executable:
+    if executable:
+        executable = Path(executable)
+        if not executable.is_file():
+            raise OpenSCADException(
+                f"Specified executable {executable} does not exist."
+            )
+    else:
         executable = detect_executable()
 
     cmd = [executable, "-o", output_file, scad_file]

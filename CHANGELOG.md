@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - API documentation
+- Full static typing, expanded file paths to support Path or str types.
 
 ### Fixed
 

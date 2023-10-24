@@ -15,6 +15,8 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import math
+from os import PathLike
+from typing import Union
 
 import numpy as np
 import pythreejs as pjs
@@ -22,7 +24,10 @@ import stl
 
 
 def visualize_stl(
-    stl_file: str, width: int = 400, height: int = 400, grid_unit: float = 1
+    stl_file: Union[str, PathLike],
+    width: int = 400,
+    height: int = 400,
+    grid_unit: float = 1,
 ):
     """Render a visualization of a stl.
 
