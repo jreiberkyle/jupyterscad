@@ -14,25 +14,20 @@ Jupyter SCAD can be installed with `pip`:
 pip install jupyterscad
 ```
 
-An OpenSCAD object can be defined using SolidPython2.
-
-```python
-from solid2 import cube
-obj = cube([1.5,2,1],center=True)
-```
-
-And visualized with Jupyter SCAD `render`:
+An OpenSCAD object can be defined using SolidPython2, visualized in a Jupyter
+notebook, and saved to an `stl` file with:
 
 ```python
 from jupyterscad import render
+from solid2 import cube
 
-render(obj)
+render(cube([1.5,2,1],center=True), outfile='cube.stl')
 ```
 
 ![render example](https://github.com/jreiberkyle/jupyterscad/blob/main/images/render_cube.png?raw=True)
 
-The stl generated in rendering can also be saved by defining 'outfile':
+See the [Usage](usage.md) page for more examples.
 
-```python
-render(obj, outfile='obj.stl')
-```
+## License
+
+Jupyter SCAD is licensed under the [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl-3.0.en.html).

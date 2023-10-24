@@ -2,11 +2,14 @@
 title: API Reference
 ---
 
-::: jupyterscad.render
-    options:
-      show_source: false
-      heading_level: 2
+## ::: jupyterscad.render
+    rendering:
+      show_root_full_path: false
 
 ## ::: jupyterscad.render_stl
+    rendering:
+      show_root_full_path: false
 
 ## ::: jupyterscad.visualize_stl
+    rendering:
+      show_root_full_path: false
