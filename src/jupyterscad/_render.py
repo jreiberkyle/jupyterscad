@@ -66,14 +66,14 @@ def render(
 
 def render_stl(
     obj,
-    output_file: Union[str, PathLike],
+    outfile: Union[str, PathLike],
     openscad_exec: Optional[Union[str, PathLike]] = None,
 ):
     """Render a stl from an OpenSCAD object.
 
     Typical usage example:
 
-        >>> render_stl(cube(3), outfile='cube.stl')
+        >>> render_stl(cube(3), 'cube.stl')
 
     Args:
         obj: OpenSCAD object to visualize.
@@ -87,4 +87,4 @@ def render_stl(
         with open(scad_tmp_file.name, "w") as fp:
             fp.write(str(obj))
 
-        process(scad_tmp_file.name, output_file, executable=openscad_exec)
+        process(scad_tmp_file.name, outfile, executable=openscad_exec)
