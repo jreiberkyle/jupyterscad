@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - API documentation
 - Full static typing, expanded file paths to support Path or str types.
 - Full external documentation pages
+- render and visualize_stl: add grid autoscaling when `grid_unit` is set to `-1`
 
 ### Fixed
 
