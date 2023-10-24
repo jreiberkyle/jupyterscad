@@ -1,0 +1,32 @@
+site_name: Jupyter SCAD
+
+repo_name: jreiberkyle/jupyterscad
+repo_url: https://github.com/jreiberkyle/jupyterscad
+edit_uri: ""
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_root_heading: true
+            show_source: false
+            docstring_style: google
+            docstring_section_style: list
+
+
+theme:
+  name: material
+  features:
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences

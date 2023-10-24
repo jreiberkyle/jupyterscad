@@ -28,13 +28,12 @@ def visualize_stl(
     width: int = 400,
     height: int = 400,
     grid_unit: float = 1,
-):
+) -> pjs.Renderer:
     """Render a visualization of a stl.
 
     Typical usage example:
 
-      r = render('cube.stl')
-      display(r)
+        >>> display(visualize_stl(cube(3)))
 
     Args:
         stl_file: stl file to visualize.

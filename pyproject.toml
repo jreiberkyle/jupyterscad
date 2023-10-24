@@ -28,6 +28,7 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest", "solidpython2"]
+docs = ["mkdocs<2", "mkdocs-material<10", "mkdocstrings-python"]
 
 [project.urls]
 Homepage = "https://github.com/jreiberkyle/jupyterscad"

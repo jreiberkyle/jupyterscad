@@ -76,6 +76,22 @@ def analyze(session):
 
 
 @nox.session
+def serve(session):
+    """Build and serve live docs for editing"""
+    session.install("-e", ".[docs]")
+
+    session.run("mkdocs", "serve")
+
+
+@nox.session
+def deploy(session):
+    """Deploy docs to github pages"""
+    session.install("-e", ".[docs]")
+
+    session.run("mkdocs", "gh-deploy")
+
+
+@nox.session
 def build(session):
     """Build package"""
     # check preexisting
