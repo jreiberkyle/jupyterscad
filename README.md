@@ -29,7 +29,6 @@ render(cube([1.5,2,1],center=True), outfile='cube.stl')
 
 ![render example](https://github.com/jreiberkyle/jupyterscad/blob/main/images/render_cube.png?raw=True)
 
-
 ## Alternatives
 
 As an alternative to Jupyter SCAD, one could use a Jupyter notebook as an external editor, using SolidPython2 to update the SCAD file and OpenSCAD to visualize and render the SCAD file.

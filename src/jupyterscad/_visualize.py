@@ -39,7 +39,7 @@ def visualize_stl(
         stl_file: stl file to visualize.
         width: Visualization pixel width on page.
         height: Visualization pixel height on page.
-        grid_unit: Grid cell size.
+        grid_unit: Grid cell size, 0 to disable, -1 for automatic
 
     Returns:
         Rendering to be displayed.
@@ -116,6 +116,10 @@ class Visualizer:
         min_ = np.minimum(self.stl_mesh.min_, np.array([0, 0, 0]))
         max_ = np.maximum(self.stl_mesh.max_, np.array([0, 0, 0]))
         max_extend = (max_ - min_).max()
+
+        if unit == -1:
+            unit = 10 ** math.floor(math.log10(max_extend))
+
         grid_extent = roundToUnits(max_extend) + 2 * unit
 
         grid_pos = (
