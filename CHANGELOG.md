@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - API documentation
 - Full static typing, expanded file paths to support Path or str types.
+- Full external documentation pages
 
 ### Fixed
 

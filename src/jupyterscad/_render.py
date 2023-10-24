@@ -18,6 +18,8 @@ import tempfile
 from os import PathLike
 from typing import Optional, Union
 
+import pythreejs as pjs
+
 from ._openscad import process
 from ._visualize import visualize_stl
 
@@ -29,14 +31,12 @@ def render(
     grid_unit: float = 1,
     outfile: Optional[Union[str, PathLike]] = None,
     openscad_exec: Optional[Union[str, PathLike]] = None,
-):
+) -> pjs.Renderer:
     """Render a visusualization of an OpenSCAD object.
 
     Typical usage example:
 
-      obj = cube(3)
-      r = render(obj)
-      display(r)
+        >>> display(render(cube(3)))
 
     Args:
         obj: OpenSCAD object to visualize.
@@ -73,8 +73,7 @@ def render_stl(
 
     Typical usage example:
 
-      obj = cube(3)
-      render_stl(obj, outfile='cube.stl')
+        >>> render_stl(cube(3), outfile='cube.stl')
 
     Args:
         obj: OpenSCAD object to visualize.
