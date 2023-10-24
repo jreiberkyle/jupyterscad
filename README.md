@@ -5,7 +5,7 @@ Jupyter SCAD renders and interactively visualizes 3D objects described in [Solid
 
 This program is focused on the use case of generating stl files with Python (aka SolidPython2) interactively within a Jupyter notebook.
 
-## documentation
+## Documentation
 
 Documentation is hosted at https://jreiberkyle.github.io/jupyterscad/.
 
