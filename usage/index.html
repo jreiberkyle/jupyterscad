@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../api/">
       
-      
-        <link rel="next" href="../usage/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>API Reference - Jupyter SCAD</title>
+        <title>Usage Examples - Jupyter SCAD</title>
       
     
     
@@ -67,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jupyterscad.render" class="md-skip">
+        <a href="#usage-examples" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              API Reference
+              Usage Examples
             
           </span>
         </div>
@@ -233,6 +231,25 @@
       
   
   
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -241,12 +258,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    API Reference
+    Usage Examples
   </span>
   
 
@@ -257,7 +276,7 @@
         
   
   <span class="md-ellipsis">
-    API Reference
+    Usage Examples
   </span>
   
 
@@ -269,6 +288,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -277,23 +298,70 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jupyterscad.render" class="md-nav__link">
-    render()
+  <a href="#defining-an-openscad-object" class="md-nav__link">
+    Defining an OpenSCAD object
   </a>
+  
+    <nav class="md-nav" aria-label="Defining an OpenSCAD object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solidpython2" class="md-nav__link">
+    SolidPython2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openscad" class="md-nav__link">
+    OpenSCAD
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#jupyterscad.render_stl" class="md-nav__link">
-    render_stl()
+  <a href="#rendering-an-openscad-object" class="md-nav__link">
+    Rendering an OpenSCAD object
+  </a>
+  
+    <nav class="md-nav" aria-label="Rendering an OpenSCAD object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-and-rendering-to-an-stl" class="md-nav__link">
+    Visualizing and Rendering to an stl
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#jupyterscad.visualize_stl" class="md-nav__link">
-    visualize_stl()
+        
+          <li class="md-nav__item">
+  <a href="#adjusting-grid-size" class="md-nav__link">
+    Adjusting grid size
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rendering-directly-to-an-stl" class="md-nav__link">
+    Rendering directly to an stl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-an-stl" class="md-nav__link">
+    Visualizing an stl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -301,25 +369,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../usage/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Usage Examples
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -341,6 +390,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -349,23 +400,70 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jupyterscad.render" class="md-nav__link">
-    render()
+  <a href="#defining-an-openscad-object" class="md-nav__link">
+    Defining an OpenSCAD object
   </a>
+  
+    <nav class="md-nav" aria-label="Defining an OpenSCAD object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solidpython2" class="md-nav__link">
+    SolidPython2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openscad" class="md-nav__link">
+    OpenSCAD
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#jupyterscad.render_stl" class="md-nav__link">
-    render_stl()
+  <a href="#rendering-an-openscad-object" class="md-nav__link">
+    Rendering an OpenSCAD object
+  </a>
+  
+    <nav class="md-nav" aria-label="Rendering an OpenSCAD object">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-and-rendering-to-an-stl" class="md-nav__link">
+    Visualizing and Rendering to an stl
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#jupyterscad.visualize_stl" class="md-nav__link">
-    visualize_stl()
+        
+          <li class="md-nav__item">
+  <a href="#adjusting-grid-size" class="md-nav__link">
+    Adjusting grid size
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rendering-directly-to-an-stl" class="md-nav__link">
+    Rendering directly to an stl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-an-stl" class="md-nav__link">
+    Visualizing an stl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -384,264 +482,51 @@
                   
 
 
-  <h1>API Reference</h1>
-
-<div class="doc doc-object doc-function">
-
-
-
-
-<h2 id="jupyterscad.render" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">grid_unit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">openscad_exec</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents first">
-  
-      <p>Render a visusualization of an OpenSCAD object.</p>
-<p>Typical usage example:</p>
-<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; display(render(cube(3)))
-</code></pre></div>
-
-
-
-  <p>Parameters:</p>
-  <ul>
-      <li class="field-body">
-        <b><code>obj</code></b>
-        –
-        <div class="doc-md-description">
-          <p>OpenSCAD object to visualize.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>width</code></b>
-            (<code>int</code>, default:
-                <code>400</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Visualization pixel width on page.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>height</code></b>
-            (<code>int</code>, default:
-                <code>400</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Visualization pixel height on page.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>grid_unit</code></b>
-            (<code>float</code>, default:
-                <code>1</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Grid cell size.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>outfile</code></b>
-            (<code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]]</code>, default:
-                <code>None</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Name of stl file to generate. No stl file is generated if None.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>openscad_exec</code></b>
-            (<code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]]</code>, default:
-                <code>None</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Path to openscad executable.</p>
-        </div>
-      </li>
-  </ul>
-
-
-
-  <p>Returns:</p>
-  <ul>
-      <li class="field-body">
-            <code><span title="pythreejs.Renderer">Renderer</span></code>
-        –
-        <div class="doc-md-description">
-          <p>Rendering to be displayed.</p>
-      </div>
-      </li>
-  </ul>
-
-
-
-  <p>Raises:</p>
-  <ul>
-      <li class="field-body">
-            <code><span title="jupyterscad.exceptions.OpenSCADException">OpenSCADException</span></code>
-          –
-        <div class="doc-md-description">
-          <p>An error occurred running OpenSCAD.</p>
-        </div>
-      </li>
-  </ul>
-
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-function">
-
-
-
-
-<h2 id="jupyterscad.render_stl" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">render_stl</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">openscad_exec</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents first">
-  
-      <p>Render a stl from an OpenSCAD object.</p>
-<p>Typical usage example:</p>
-<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; render_stl(cube(3), outfile=&#39;cube.stl&#39;)
-</code></pre></div>
-
-
-
-  <p>Parameters:</p>
-  <ul>
-      <li class="field-body">
-        <b><code>obj</code></b>
-        –
-        <div class="doc-md-description">
-          <p>OpenSCAD object to visualize.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>outfile</code></b>
-        –
-        <div class="doc-md-description">
-          <p>Name of stl file to generate. No stl file is generated if None.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>openscad_exec</code></b>
-            (<code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]]</code>, default:
-                <code>None</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Path to openscad executable.</p>
-        </div>
-      </li>
-  </ul>
-
-
-
-  <p>Raises:</p>
-  <ul>
-      <li class="field-body">
-            <code><span title="jupyterscad.exceptions.OpenSCADException">OpenSCADException</span></code>
-          –
-        <div class="doc-md-description">
-          <p>An error occurred running OpenSCAD.</p>
-        </div>
-      </li>
-  </ul>
-
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-function">
-
-
-
-
-<h2 id="jupyterscad.visualize_stl" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">visualize_stl</span><span class="p">(</span><span class="n">stl_file</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">grid_unit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents first">
-  
-      <p>Render a visualization of a stl.</p>
-<p>Typical usage example:</p>
-<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; display(visualize_stl(cube(3)))
-</code></pre></div>
-
-
-
-  <p>Parameters:</p>
-  <ul>
-      <li class="field-body">
-        <b><code>stl_file</code></b>
-            (<code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>)
-        –
-        <div class="doc-md-description">
-          <p>stl file to visualize.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>width</code></b>
-            (<code>int</code>, default:
-                <code>400</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Visualization pixel width on page.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>height</code></b>
-            (<code>int</code>, default:
-                <code>400</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Visualization pixel height on page.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>grid_unit</code></b>
-            (<code>float</code>, default:
-                <code>1</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Grid cell size.</p>
-        </div>
-      </li>
-  </ul>
-
-
-
-  <p>Returns:</p>
-  <ul>
-      <li class="field-body">
-            <code><span title="pythreejs.Renderer">Renderer</span></code>
-        –
-        <div class="doc-md-description">
-          <p>Rendering to be displayed.</p>
-      </div>
-      </li>
-  </ul>
-
-  </div>
-
-</div>
+<h1 id="usage-examples">Usage Examples</h1>
+<h2 id="defining-an-openscad-object">Defining an OpenSCAD object</h2>
+<p>An OpenSCAD object can be defined using SolidPython2 or OpenSCAD.</p>
+<h3 id="solidpython2">SolidPython2</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">solid2</span> <span class="kn">import</span> <span class="n">cube</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">obj</span> <span class="o">=</span> <span class="n">cube</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="openscad">OpenSCAD</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">obj</span> <span class="o">=</span> <span class="s1">&#39;cube([1.5,2,1],center=true);&#39;</span>
+</span></code></pre></div>
+<p>Note: If a 3D object description integrates an external stl file, then the stl must be in the same directory as the notebook running the code.</p>
+<p>See the <a href="https://en.wikibooks.org/wiki/OpenSCAD_User_Manual#The_OpenSCAD_Language_Reference">OpenSCAD language</a> and <a href="https://github.com/jeff-dh/SolidPython">SolidPython2</a> pages for more information on how to use these tools.</p>
+<h2 id="rendering-an-openscad-object">Rendering an OpenSCAD object</h2>
+<h3 id="visualizing-and-rendering-to-an-stl">Visualizing and Rendering to an stl</h3>
+<p>To visualize an OpenSCAD object, use <code>render</code>:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">jupyterscad</span> <span class="kn">import</span> <span class="n">render</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">solid2</span> <span class="kn">import</span> <span class="n">cube</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">obj</span> <span class="o">=</span> <span class="n">cube</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">render</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span></code></pre></div>
+<img alt="render example" src="https://github.com/jreiberkyle/jupyterscad/blob/main/images/render_cube.png?raw=True" /></p>
+<p>The rendering can also save the stl file by defining 'outfile':</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">jupyterscad</span> <span class="kn">import</span> <span class="n">render</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">solid2</span> <span class="kn">import</span> <span class="n">cube</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">obj</span> <span class="o">=</span> <span class="n">cube</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">render</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;obj.stl&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="adjusting-grid-size">Adjusting grid size</h3>
+<p>In <code>render</code> and <code>visualize_stl</code>, the default grid unit is 1. The grid unit can
+be set to e.g. <code>10</code> with <code>grid_unit=10</code>, disabled with <code>grid_unit=0</code> or set to
+automatic scaling with <code>grid_unit=-1</code>.</p>
+<h3 id="rendering-directly-to-an-stl">Rendering directly to an stl</h3>
+<p>An stl can be generated directly without visualization with:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">jupyterscad</span> <span class="kn">import</span> <span class="n">render_stl</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">render_stl</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;obj.stl&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="visualizing-an-stl">Visualizing an stl</h3>
+<p>A stl can be visualized with:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">jupyterscad</span> <span class="kn">import</span> <span class="n">visualize_stl</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">visualize_stl</span><span class="p">(</span><span class="s1">&#39;obj.stl&#39;</span><span class="p">)</span>
+</span></code></pre></div>
 
 
 
