@@ -1,0 +1,46 @@
+name: Openscad Discovery Test
+
+on:
+  workflow_dispatch
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: Install OpenSCAD
+        run: brew install openscad
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install code
+        run: pip install .
+
+      - name: Render stl
+        run: python -c "from jupyterscad import render_stl; render_stl('cube([3,3,3]);', 'output.stl')"
+
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install OpenSCAD
+        run: sudo apt-get install -y openscad
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install code
+        run: pip install .
+
+      - name: Render stl
+        run: python -c "from jupyterscad import render_stl; render_stl('cube([3,3,3]);', 'output.stl')"
+

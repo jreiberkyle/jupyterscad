@@ -27,11 +27,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-test = ["pytest"]
+test = ["pytest", "solidpython2"]
+docs = ["mkdocs<2", "mkdocs-material<10", "mkdocstrings-python"]
 
 [project.urls]
-Homepage = "https://github.com/jreiberkyle/jupyterscad"
-Documentation = "https://github.com/jreiberkyle/jupyterscad"
+Homepage = "https://jreiberkyle.github.io/jupyterscad/"
+Documentation = "https://jreiberkyle.github.io/jupyterscad/"
 Repository = "https://github.com/jreiberkyle/jupyterscad"
 Changelog = "https://github.com/jreiberkyle/jupyterscad/blob/main/CHANGELOG.md"
 

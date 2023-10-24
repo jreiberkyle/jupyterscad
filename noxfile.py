@@ -24,7 +24,7 @@ BUILD_DIRS = ["build", "dist"]
 nox.options.stop_on_first_error = True
 nox.options.reuse_existing_virtualenvs = False
 
-nox.options.sessions = ["format", "lint", "test"]
+nox.options.sessions = ["format", "lint", "analyze", "test"]
 
 
 @nox.session(python=["3.8", "3.9", "3.10", "3.11", "3.12"])
@@ -41,18 +41,20 @@ def format(session):
 
     session.install("isort")
     try:
-        session.run("python", "-m", "isort", "--check-only", "src")
+        session.run("python", "-m", "isort", "--check-only", "src", "tests")
     except nox.command.CommandFailed:
         errors.append(
-            "isort check failed. Pip install isort then run 'python -m isort src' to format files"
+            "isort check failed. Pip install isort then run "
+            "'python -m isort src tests' to format files"
         )
 
     session.install("black")
     try:
-        session.run("python", "-m", "black", "--check", "src")
+        session.run("python", "-m", "black", "--check", "src", "tests")
     except nox.command.CommandFailed:
         errors.append(
-            "Black check failed. Pip install black then run 'python -m black src' to format files"
+            "Black check failed. Pip install black then run "
+            "'python -m black src tests' to format files"
         )
 
     if errors:
@@ -64,6 +66,29 @@ def lint(session):
     session.install("flake8")
 
     session.run("flake8", "src")
+
+
+@nox.session
+def analyze(session):
+    session.install("mypy")
+
+    session.run("mypy", "--ignore-missing", "src")
+
+
+@nox.session
+def serve(session):
+    """Build and serve live docs for editing"""
+    session.install("-e", ".[docs]")
+
+    session.run("mkdocs", "serve")
+
+
+@nox.session
+def deploy(session):
+    """Deploy docs to github pages"""
+    session.install("-e", ".[docs]")
+
+    session.run("mkdocs", "gh-deploy")
 
 
 @nox.session
