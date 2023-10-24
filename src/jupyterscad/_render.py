@@ -15,8 +15,8 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import tempfile
-from pathlib import Path
-from typing import Optional
+from os import PathLike
+from typing import Optional, Union
 
 from ._openscad import process
 from ._visualize import visualize_stl
@@ -27,8 +27,8 @@ def render(
     width: int = 400,
     height: int = 400,
     grid_unit: float = 1,
-    outfile: Optional[str] = None,
-    openscad_exec: Optional[Path] = None,
+    outfile: Optional[Union[str, PathLike]] = None,
+    openscad_exec: Optional[Union[str, PathLike]] = None,
 ):
     """Render a visusualization of an OpenSCAD object.
 
@@ -53,18 +53,22 @@ def render(
         exceptions.OpenSCADException: An error occurred running OpenSCAD.
     """
     if outfile:
-        render_stl(str(obj), outfile, openscad_exec=openscad_exec)
+        render_stl(obj, outfile, openscad_exec=openscad_exec)
         r = visualize_stl(outfile, width=width, height=height, grid_unit=grid_unit)
     else:
         with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as stl_tmp_file:
-            render_stl(str(obj), stl_tmp_file.name, openscad_exec=openscad_exec)
+            render_stl(obj, stl_tmp_file.name, openscad_exec=openscad_exec)
             r = visualize_stl(
                 stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit
             )
     return r
 
 
-def render_stl(obj, output_file, openscad_exec: Optional[Path] = None):
+def render_stl(
+    obj,
+    output_file: Union[str, PathLike],
+    openscad_exec: Optional[Union[str, PathLike]] = None,
+):
     """Render a stl from an OpenSCAD object.
 
     Typical usage example:

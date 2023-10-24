@@ -17,4 +17,4 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 from ._render import render, render_stl
 from ._visualize import visualize_stl
 
-__all__ = ['render', 'render_stl', 'visualize_stl']
+__all__ = ["render", "render_stl", "visualize_stl"]
