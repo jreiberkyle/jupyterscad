@@ -24,7 +24,7 @@ BUILD_DIRS = ["build", "dist"]
 nox.options.stop_on_first_error = True
 nox.options.reuse_existing_virtualenvs = False
 
-nox.options.sessions = ["format", "lint", "test"]
+nox.options.sessions = ["format", "lint", "analyze", "test"]
 
 
 @nox.session(python=["3.8", "3.9", "3.10", "3.11", "3.12"])
@@ -66,6 +66,13 @@ def lint(session):
     session.install("flake8")
 
     session.run("flake8", "src")
+
+
+@nox.session
+def analyze(session):
+    session.install("mypy")
+
+    session.run("mypy", "--ignore-missing", "src")
 
 
 @nox.session

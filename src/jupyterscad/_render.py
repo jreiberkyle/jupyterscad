@@ -16,6 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import tempfile
 from pathlib import Path
+from typing import Optional
 
 from ._openscad import process
 from ._visualize import visualize_stl
@@ -26,8 +27,8 @@ def render(
     width: int = 400,
     height: int = 400,
     grid_unit: float = 1,
-    outfile: str = None,
-    openscad_exec: Path = None,
+    outfile: Optional[str] = None,
+    openscad_exec: Optional[Path] = None,
 ):
     """Render a visusualization of an OpenSCAD object.
 
@@ -63,7 +64,7 @@ def render(
     return r
 
 
-def render_stl(obj, output_file, openscad_exec: Path = None):
+def render_stl(obj, output_file, openscad_exec: Optional[Path] = None):
     """Render a stl from an OpenSCAD object.
 
     Typical usage example:

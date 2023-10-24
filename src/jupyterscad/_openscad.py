@@ -18,13 +18,14 @@ import logging
 import subprocess
 from pathlib import Path
 from shutil import which
+from typing import Optional
 
 from .exceptions import OpenSCADException
 
 LOGGER = logging.getLogger(__name__)
 
 
-def process(scad_file, output_file, executable: Path = None):
+def process(scad_file, output_file, executable: Optional[Path] = None):
     """Generate stl from scad using OpenSCAD executable"""
     if executable and not Path(executable).is_file():
         raise OpenSCADException(f"Specified executable {executable} does not exist.")
