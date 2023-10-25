@@ -17,6 +17,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 import logging
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from jupyterscad import _visualize, visualize_stl
@@ -29,3 +30,19 @@ def test_Visualizer_create_renderer(test_data):
 
 def test_visualize_stl_success(test_data):
     visualize_stl(test_data("test.stl"))
+
+
+@pytest.mark.parametrize(
+    "min_, max_, unit, grid_min, grid_center, grid_extent",
+    [
+        ((0, 0, 0), (5, 5, 5), 1, (-1, -1, -1), (2.5, 2.5, 2.5), 7),
+        ((0, 0, 0), (5, 5, 5), 10, (-10, -10, -10), (0, 0, 0), 20),
+    ],
+)
+def test_get_grid_dimensions(min_, max_, unit, grid_min, grid_center, grid_extent):
+    calc_grid_min, calc_grid_center, calc_grid_extent = _visualize.get_grid_dimensions(
+        np.array(min_), np.array(max_), unit
+    )
+    np.testing.assert_equal(calc_grid_min, grid_min)
+    np.testing.assert_equal(calc_grid_center, grid_center)
+    assert calc_grid_extent == grid_extent

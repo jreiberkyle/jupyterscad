@@ -110,52 +110,66 @@ class Visualizer:
         scene.add(pjs.AxesHelper(max(self.stl_mesh.max_ * 2)))
 
     def add_grid(self, scene, unit=1):
-        def roundToUnits(x):
-            return round(x / unit) * unit
-
-        min_ = np.minimum(self.stl_mesh.min_, np.array([0, 0, 0]))
-        max_ = np.maximum(self.stl_mesh.max_, np.array([0, 0, 0]))
-        max_extend = (max_ - min_).max()
-
-        if unit == -1:
-            unit = 10 ** math.floor(math.log10(max_extend))
-
-        grid_extent = roundToUnits(max_extend) + 2 * unit
-
-        grid_pos = (
-            grid_extent / 2 - unit + roundToUnits(min_[0]),
-            grid_extent / 2 - unit + roundToUnits(min_[1]),
-            grid_extent / 2 - unit + roundToUnits(min_[2]),
+        grid_min, grid_center, grid_extent = get_grid_dimensions(
+            self.stl_mesh.min_, self.stl_mesh.max_, unit
         )
 
         # X/Z plane
         gh = pjs.GridHelper(
             grid_extent,
             grid_extent / unit,
-            colorCenterLine="blue",
-            colorGrid="blue",
+            colorCenterLine="green",
+            colorGrid="green",
         )
-        gh.position = (grid_pos[0], 0, grid_pos[2])
+        gh.position = (grid_center[0], grid_min[1], grid_center[2])
         scene.add(gh)
 
         # X/Y plane
         gh = pjs.GridHelper(
             grid_extent,
             grid_extent / unit,
-            colorCenterLine="red",
-            colorGrid="red",
+            colorCenterLine="blue",
+            colorGrid="blue",
         )
         gh.rotateX(math.pi / 2)
-        gh.position = (grid_pos[0], grid_pos[1], 0)
+        gh.position = (grid_center[0], grid_center[1], grid_min[2])
         scene.add(gh)
 
         # Y/Z plane
         gh = pjs.GridHelper(
             grid_extent,
             grid_extent / unit,
-            colorCenterLine="green",
-            colorGrid="green",
+            colorCenterLine="red",
+            colorGrid="red",
         )
         gh.rotateZ(math.pi / 2)
-        gh.position = (0, grid_pos[1], grid_pos[2])
+        gh.position = (grid_min[0], grid_center[1], grid_center[2])
         scene.add(gh)
+
+
+def get_grid_dimensions(mesh_min, mesh_max, unit):
+    view_min = mesh_min
+    view_extent = (mesh_max - mesh_min).max()
+
+    if unit == -1:
+        unit = 10 ** math.floor(math.log10(view_extent))
+
+    grid_min = np.floor(view_min / unit) * unit
+    print(grid_min)
+
+    # if grid falls right on extent, add one unit buffer
+    grid_min_buff = np.logical_not(np.mod(view_min, unit)) * unit
+    print(grid_min_buff)
+
+    view_max = view_min + view_extent
+    grid_max = np.ceil(view_max / unit) * unit
+    print(grid_max)
+
+    # if grid falls right on extent, add one unit buffer
+    grid_max_buff = np.logical_not(np.mod(view_max, unit)) * unit
+    print(grid_max_buff)
+
+    grid_extent = (grid_max + grid_max_buff - grid_min + grid_min_buff).max()
+    grid_center = grid_min - grid_min_buff + grid_extent / 2
+
+    return grid_min - grid_min_buff, grid_center, grid_extent
