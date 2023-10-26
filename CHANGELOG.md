@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Output to stderr if openscad rendering encountered an error.
+
+
 ## [0.2.0] - 2023-10-24
 
 ### Added
@@ -27,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   in the macOS-specific install path if not found in PATH
 - Rename render_stl out_file to outfile for positional arg to match other fcns
 
+
 ## [0.1.0] - 2023-10-01
 
 ### Added
@@ -37,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - package files moved to src/ directory for autodetection
+
 
 ## [0.0.1] - 2023-09-29
 

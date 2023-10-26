@@ -22,6 +22,7 @@ import pythreejs as pjs
 
 from ._openscad import process
 from ._visualize import visualize_stl
+from .exceptions import RenderError
 
 
 def render(
@@ -52,16 +53,21 @@ def render(
     Raises:
         exceptions.OpenSCADException: An error occurred running OpenSCAD.
     """
-    if outfile:
-        render_stl(obj, outfile, openscad_exec=openscad_exec)
-        r = visualize_stl(outfile, width=width, height=height, grid_unit=grid_unit)
-    else:
-        with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as stl_tmp_file:
-            render_stl(obj, stl_tmp_file.name, openscad_exec=openscad_exec)
-            r = visualize_stl(
-                stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit
-            )
-    return r
+    try:
+        if outfile:
+            render_stl(obj, outfile, openscad_exec=openscad_exec)
+            r = visualize_stl(outfile, width=width, height=height, grid_unit=grid_unit)
+        else:
+            with tempfile.NamedTemporaryFile(
+                suffix=".stl", delete=False
+            ) as stl_tmp_file:
+                render_stl(obj, stl_tmp_file.name, openscad_exec=openscad_exec)
+                r = visualize_stl(
+                    stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit
+                )
+        return r
+    except RenderError as e:
+        e.show()
 
 
 def render_stl(
