@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
+import subprocess
 
 import pytest
 
@@ -38,7 +39,7 @@ def output_file(tmp_path):
 
 def test_invalid_openscad_exec(scad_file, output_file):
     """What happens when the provided openscad_exec doesn't exist"""
-    with pytest.raises(exceptions.OpenSCADException):
+    with pytest.raises(exceptions.OpenSCADError):
         _openscad.process(scad_file, output_file, "invalid")
 
 
@@ -46,7 +47,7 @@ def test_detect_executable_failure(monkeypatch):
     """No executable found"""
     monkeypatch.setattr(_openscad, "which", lambda x, path=None: None)
 
-    with pytest.raises(exceptions.OpenSCADException):
+    with pytest.raises(exceptions.OpenSCADError):
         _openscad.detect_executable()
 
 
@@ -60,7 +61,7 @@ def test_detect_executable_success(monkeypatch, tmp_path):
 def check_openscad():
     try:
         _openscad.detect_executable()
-    except exceptions.OpenSCADException:
+    except exceptions.OpenSCADError:
         pytest.skip("OpenSCAD not detected.")
 
 
@@ -77,5 +78,25 @@ def test_process_invalid_scad(check_openscad, tmp_path, output_file):
     with open(input_scad_file, "w") as fp:
         fp.write("invalid_scad;")
 
-    with pytest.raises(exceptions.OpenSCADException):
+    with pytest.raises(exceptions.OpenSCADError):
         _openscad.process(input_scad_file, output_file)
+
+
+def test_process_render_error(monkeypatch, tmp_path, output_file):
+    error_msg = (
+        "ERROR: The given mesh is not closed! Unable to convert to CGAL_Nef_Polyhedron"
+    )
+
+    mock_resp = subprocess.CompletedProcess(
+            args=None, returncode=0, stdout='', stderr=error_msg)
+    monkeypatch.setattr(_openscad.subprocess, "run", lambda *arg, **kwarg: mock_resp)
+
+    scad_str = "cube([3,3,3]);"
+    input_scad_file = tmp_path / "test.scad"
+    with open(input_scad_file, "w") as fp:
+        fp.write(scad_str)
+
+    with pytest.raises(exceptions.RenderError) as e:
+        _openscad.process(input_scad_file, output_file)
+        assert e.message == out
+        assert e.src == scad_str

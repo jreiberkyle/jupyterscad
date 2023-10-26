@@ -21,7 +21,7 @@ from pathlib import Path
 from shutil import which
 from typing import Optional, Union
 
-from .exceptions import OpenSCADException, RenderError
+from .exceptions import OpenSCADError, RenderError
 
 LOGGER = logging.getLogger(__name__)
 
@@ -31,26 +31,20 @@ def process(scad_file, output_file, executable: Optional[Union[str, PathLike]] =
     if executable:
         executable = Path(executable)
         if not executable.is_file():
-            raise OpenSCADException(
-                f"Specified executable {executable} does not exist."
-            )
+            raise OpenSCADError(f"Specified executable {executable} does not exist.")
     else:
         executable = detect_executable()
-    
+
     cmd = [executable, "-o", output_file, scad_file]
     LOGGER.info(cmd)
     try:
         out = subprocess.run(cmd, check=True, capture_output=True, text=True)
-        if("ERROR" in out.stderr):
-            raise RenderError(out.stderr)
-            # import sys
-            # from warnings import warn; warn('\n'+out.stderr, stacklevel=2)
-            # print("ERROR", file=sys.stderr)
-            # print(out.stderr, file=sys.stderr)
-        # else:
-            # print(out.stderr)
+        if "ERROR" in out.stderr:
+            with open(scad_file) as fp:
+                scad_str = fp.read()
+            raise RenderError(message=out.stderr, src=scad_str)
     except subprocess.CalledProcessError as e:
-        raise OpenSCADException(str(e.stderr))
+        raise OpenSCADError(str(e.stderr))
 
 
 def detect_executable() -> Path:
@@ -61,7 +55,7 @@ def detect_executable() -> Path:
     )  # macOS
 
     if not detected_executable:
-        raise OpenSCADException(
+        raise OpenSCADError(
             "OpenSCAD executable autodetection failed. "
             "Please specify the path to the OpenSCAD executable."
         )

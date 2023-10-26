@@ -16,6 +16,7 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import sys
 
+
 class JupyterSCADError(Exception):
     pass
 
@@ -25,9 +26,10 @@ class OpenSCADError(JupyterSCADError):
 
 
 class RenderError(JupyterSCADError):
-    def __init__(self, message: str) -> None:
+    def __init__(self, message: str, src: str) -> None:
         super().__init__(message)
         self.message = message
+        self.src = src
 
     def show(self) -> None:
-       print(self.message, file=sys.stderr)
+        print(f"{self.message}\nSCAD SOURCE:\n\n{self.src}", file=sys.stderr)

@@ -58,7 +58,9 @@ def render(
             render_stl(obj, outfile, openscad_exec=openscad_exec)
             r = visualize_stl(outfile, width=width, height=height, grid_unit=grid_unit)
         else:
-            with tempfile.NamedTemporaryFile(suffix=".stl", delete=False) as stl_tmp_file:
+            with tempfile.NamedTemporaryFile(
+                suffix=".stl", delete=False
+            ) as stl_tmp_file:
                 render_stl(obj, stl_tmp_file.name, openscad_exec=openscad_exec)
                 r = visualize_stl(
                     stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit
