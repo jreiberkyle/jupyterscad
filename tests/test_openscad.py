@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
+from pathlib import Path
 import subprocess
 
 import pytest
@@ -83,12 +84,17 @@ def test_process_invalid_scad(check_openscad, tmp_path, output_file):
 
 
 def test_process_render_error(monkeypatch, tmp_path, output_file):
+    monkeypatch.setattr(
+        _openscad, "detect_executable", lambda *arg, **kwarg: Path("openscad")
+    )
+
     error_msg = (
         "ERROR: The given mesh is not closed! Unable to convert to CGAL_Nef_Polyhedron"
     )
 
     mock_resp = subprocess.CompletedProcess(
-            args=None, returncode=0, stdout='', stderr=error_msg)
+        args=None, returncode=0, stdout="", stderr=error_msg
+    )
     monkeypatch.setattr(_openscad.subprocess, "run", lambda *arg, **kwarg: mock_resp)
 
     scad_str = "cube([3,3,3]);"
