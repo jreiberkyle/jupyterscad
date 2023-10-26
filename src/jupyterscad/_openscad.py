@@ -21,7 +21,7 @@ from pathlib import Path
 from shutil import which
 from typing import Optional, Union
 
-from .exceptions import OpenSCADException
+from .exceptions import OpenSCADException, RenderError
 
 LOGGER = logging.getLogger(__name__)
 
@@ -36,11 +36,19 @@ def process(scad_file, output_file, executable: Optional[Union[str, PathLike]] =
             )
     else:
         executable = detect_executable()
-
+    
     cmd = [executable, "-o", output_file, scad_file]
     LOGGER.info(cmd)
     try:
-        subprocess.run(cmd, check=True, capture_output=True, text=True)
+        out = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        if("ERROR" in out.stderr):
+            raise RenderError(out.stderr)
+            # import sys
+            # from warnings import warn; warn('\n'+out.stderr, stacklevel=2)
+            # print("ERROR", file=sys.stderr)
+            # print(out.stderr, file=sys.stderr)
+        # else:
+            # print(out.stderr)
     except subprocess.CalledProcessError as e:
         raise OpenSCADException(str(e.stderr))
 

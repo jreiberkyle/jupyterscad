@@ -14,11 +14,20 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
+import sys
 
-
-class JupyterSCADException(Exception):
+class JupyterSCADError(Exception):
     pass
 
 
-class OpenSCADException(JupyterSCADException):
+class OpenSCADError(JupyterSCADError):
     pass
+
+
+class RenderError(JupyterSCADError):
+    def __init__(self, message: str) -> None:
+        super().__init__(message)
+        self.message = message
+
+    def show(self) -> None:
+       print(self.message, file=sys.stderr)
