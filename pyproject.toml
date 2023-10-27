@@ -1,6 +1,6 @@
 [project]
 name = "jupyterscad"
-version = "0.3.0dev"
+version = "0.3.1dev"
 authors = [{name = "Jennifer Reiber Kyle"}]
 description = "Solid 3D Cad (SCAD) renderer and viewer for Jupyter"
 readme = "README.md"
