@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jupyterscad.render" class="md-skip">
+        <a href="#jupyterscad.view" class="md-skip">
           Skip to content
         </a>
       
@@ -277,8 +277,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jupyterscad.render" class="md-nav__link">
-    render()
+  <a href="#jupyterscad.view" class="md-nav__link">
+    view()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jupyterscad.view_stl" class="md-nav__link">
+    view_stl()
   </a>
   
 </li>
@@ -286,13 +293,6 @@
         <li class="md-nav__item">
   <a href="#jupyterscad.render_stl" class="md-nav__link">
     render_stl()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#jupyterscad.visualize_stl" class="md-nav__link">
-    visualize_stl()
   </a>
   
 </li>
@@ -349,8 +349,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jupyterscad.render" class="md-nav__link">
-    render()
+  <a href="#jupyterscad.view" class="md-nav__link">
+    view()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jupyterscad.view_stl" class="md-nav__link">
+    view_stl()
   </a>
   
 </li>
@@ -358,13 +365,6 @@
         <li class="md-nav__item">
   <a href="#jupyterscad.render_stl" class="md-nav__link">
     render_stl()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#jupyterscad.visualize_stl" class="md-nav__link">
-    visualize_stl()
   </a>
   
 </li>
@@ -391,17 +391,17 @@
 
 
 
-<h2 id="jupyterscad.render" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">grid_unit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">openscad_exec</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<h2 id="jupyterscad.view" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">grid_unit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">openscad_exec</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 </h2>
 
 
   <div class="doc doc-contents first">
   
-      <p>Render a visusualization of an OpenSCAD object.</p>
+      <p>View an OpenSCAD object.</p>
 <p>Typical usage example:</p>
-<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; display(render(cube(3)))
+<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; view(cube(3))
 </code></pre></div>
 
 
@@ -442,7 +442,7 @@
 )
         –
         <div class="doc-md-description">
-          <p>Grid cell size.</p>
+          <p>Grid cell size, 0 to disable, -1 for automatic</p>
         </div>
       </li>
       <li class="field-body">
@@ -485,7 +485,7 @@
   <p>Raises:</p>
   <ul>
       <li class="field-body">
-            <code><span title="jupyterscad.exceptions.OpenSCADException">OpenSCADException</span></code>
+            <code><span title="jupyterscad.exceptions.OpenSCADError">OpenSCADError</span></code>
           –
         <div class="doc-md-description">
           <p>An error occurred running OpenSCAD.</p>
@@ -503,83 +503,17 @@
 
 
 
-<h2 id="jupyterscad.render_stl" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">render_stl</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">output_file</span><span class="p">,</span> <span class="n">openscad_exec</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<h2 id="jupyterscad.view_stl" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">view_stl</span><span class="p">(</span><span class="n">stl_file</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">grid_unit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 </h2>
 
 
   <div class="doc doc-contents first">
   
-      <p>Render a stl from an OpenSCAD object.</p>
+      <p>View a stl.</p>
 <p>Typical usage example:</p>
-<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; render_stl(cube(3), outfile=&#39;cube.stl&#39;)
-</code></pre></div>
-
-
-
-  <p>Parameters:</p>
-  <ul>
-      <li class="field-body">
-        <b><code>obj</code></b>
-        –
-        <div class="doc-md-description">
-          <p>OpenSCAD object to visualize.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>outfile</code></b>
-        –
-        <div class="doc-md-description">
-          <p>Name of stl file to generate. No stl file is generated if None.</p>
-        </div>
-      </li>
-      <li class="field-body">
-        <b><code>openscad_exec</code></b>
-            (<code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]]</code>, default:
-                <code>None</code>
-)
-        –
-        <div class="doc-md-description">
-          <p>Path to openscad executable.</p>
-        </div>
-      </li>
-  </ul>
-
-
-
-  <p>Raises:</p>
-  <ul>
-      <li class="field-body">
-            <code><span title="jupyterscad.exceptions.OpenSCADException">OpenSCADException</span></code>
-          –
-        <div class="doc-md-description">
-          <p>An error occurred running OpenSCAD.</p>
-        </div>
-      </li>
-  </ul>
-
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-function">
-
-
-
-
-<h2 id="jupyterscad.visualize_stl" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">visualize_stl</span><span class="p">(</span><span class="n">stl_file</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">grid_unit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
-
-</h2>
-
-
-  <div class="doc doc-contents first">
-  
-      <p>Render a visualization of a stl.</p>
-<p>Typical usage example:</p>
-<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; display(visualize_stl(cube(3)))
+<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; view_stl(cube(3))
 </code></pre></div>
 
 
@@ -621,7 +555,7 @@
 )
         –
         <div class="doc-md-description">
-          <p>Grid cell size.</p>
+          <p>Grid cell size, 0 to disable, -1 for automatic</p>
         </div>
       </li>
   </ul>
@@ -636,6 +570,73 @@
         <div class="doc-md-description">
           <p>Rendering to be displayed.</p>
       </div>
+      </li>
+  </ul>
+
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="jupyterscad.render_stl" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">jupyterscad</span><span class="o">.</span><span class="n">render_stl</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">openscad_exec</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents first">
+  
+      <p>Render a stl from an OpenSCAD object.</p>
+<p>Typical usage example:</p>
+<div class="language-text highlight"><pre><span></span><code>&gt;&gt;&gt; render_stl(cube(3), &#39;cube.stl&#39;)
+</code></pre></div>
+
+
+
+  <p>Parameters:</p>
+  <ul>
+      <li class="field-body">
+        <b><code>obj</code></b>
+        –
+        <div class="doc-md-description">
+          <p>OpenSCAD object to visualize.</p>
+        </div>
+      </li>
+      <li class="field-body">
+        <b><code>outfile</code></b>
+            (<code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>)
+        –
+        <div class="doc-md-description">
+          <p>Name of stl file to generate. No stl file is generated if None.</p>
+        </div>
+      </li>
+      <li class="field-body">
+        <b><code>openscad_exec</code></b>
+            (<code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]]</code>, default:
+                <code>None</code>
+)
+        –
+        <div class="doc-md-description">
+          <p>Path to openscad executable.</p>
+        </div>
+      </li>
+  </ul>
+
+
+
+  <p>Raises:</p>
+  <ul>
+      <li class="field-body">
+            <code><span title="jupyterscad.exceptions.OpenSCADException">OpenSCADException</span></code>
+          –
+        <div class="doc-md-description">
+          <p>An error occurred running OpenSCAD.</p>
+        </div>
       </li>
   </ul>
 

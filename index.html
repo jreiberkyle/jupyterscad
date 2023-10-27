@@ -375,19 +375,19 @@
 
 
 <h1 id="jupyter-scad">Jupyter SCAD</h1>
-<p>Jupyter SCAD renders and interactively visualizes 3D objects described in <a href="https://github.com/jeff-dh/SolidPython">SolidPython2</a> within a Jupyter notebook.</p>
+<p>Jupyter SCAD provides rendering and interactive visualization for 3D objects described in <a href="https://github.com/jeff-dh/SolidPython">SolidPython2</a> within a Jupyter notebook. Additionally, it provides interactive visualization for STLs.</p>
 <p>This program is focused on the use case of generating stl files with Python (aka SolidPython2) interactively within a Jupyter notebook.</p>
 <p>SolidPython2 generates <a href="https://en.wikibooks.org/wiki/OpenSCAD_User_Manual#The_OpenSCAD_Language_Reference">OpenSCAD language</a> code from Python code. Jupyter SCAD then uses <a href="https://openscad.org">OpenSCAD</a> to render the OpenSCAD code to a 3D model and provides interactive visualization. As an alternative to SolidPython2, the OpenSCAD code can also be provided directly.</p>
 <h2 id="quick-start">Quick Start</h2>
 <p>Jupyter SCAD can be installed with <code>pip</code>:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">pip install jupyterscad</span>
 </span></code></pre></div>
-<p>An OpenSCAD object can be defined using SolidPython2, visualized in a Jupyter
+<p>An OpenSCAD object can be defined using SolidPython2, viewed in a Jupyter
 notebook, and saved to an <code>stl</code> file with:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">jupyterscad</span> <span class="kn">import</span> <span class="n">render</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">jupyterscad</span> <span class="kn">import</span> <span class="n">view</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">solid2</span> <span class="kn">import</span> <span class="n">cube</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">render</span><span class="p">(</span><span class="n">cube</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;cube.stl&#39;</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">view</span><span class="p">(</span><span class="n">cube</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;cube.stl&#39;</span><span class="p">)</span>
 </span></code></pre></div>
 <p><img alt="render example" src="https://github.com/jreiberkyle/jupyterscad/blob/main/images/render_cube.png?raw=True" /></p>
 <p>See the <a href="usage/">Usage</a> page for more examples.</p>
