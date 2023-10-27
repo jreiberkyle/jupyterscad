@@ -1,6 +1,6 @@
 # Jupyter SCAD
 
-Jupyter SCAD renders and interactively visualizes 3D objects described in [SolidPython2](https://github.com/jeff-dh/SolidPython) within a Jupyter notebook.
+Jupyter SCAD provides rendering and interactive visualization for 3D objects described in [SolidPython2](https://github.com/jeff-dh/SolidPython) within a Jupyter notebook. Additionally, it provides interactive visualization for STLs.
 
 This program is focused on the use case of generating stl files with Python (aka SolidPython2) interactively within a Jupyter notebook.
 
@@ -14,14 +14,14 @@ Jupyter SCAD can be installed with `pip`:
 pip install jupyterscad
 ```
 
-An OpenSCAD object can be defined using SolidPython2, visualized in a Jupyter
+An OpenSCAD object can be defined using SolidPython2, viewed in a Jupyter
 notebook, and saved to an `stl` file with:
 
 ```python
-from jupyterscad import render
+from jupyterscad import view
 from solid2 import cube
 
-render(cube([1.5,2,1],center=True), outfile='cube.stl')
+view(cube([1.5,2,1],center=True), outfile='cube.stl')
 ```
 
 ![render example](https://github.com/jreiberkyle/jupyterscad/blob/main/images/render_cube.png?raw=True)

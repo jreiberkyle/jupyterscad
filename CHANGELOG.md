@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `render` renamed to `view`, `visualize_stl` renamed to `view_stl`.
+
 ### Added
 
 - Output to stderr if openscad rendering encountered an error.
