@@ -15,25 +15,74 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import math
+import tempfile
 from os import PathLike
-from typing import Union
+from typing import Optional, Union
 
 import numpy as np
 import pythreejs as pjs
 import stl
 
+from ._render import render_stl
+from .exceptions import RenderError
 
-def visualize_stl(
+
+def view(
+    obj,
+    width: int = 400,
+    height: int = 400,
+    grid_unit: float = 1,
+    outfile: Optional[Union[str, PathLike]] = None,
+    openscad_exec: Optional[Union[str, PathLike]] = None,
+) -> pjs.Renderer:
+    """View an OpenSCAD object.
+
+    Typical usage example:
+
+        >>> view(cube(3))
+
+    Args:
+        obj: OpenSCAD object to visualize.
+        width: Visualization pixel width on page.
+        height: Visualization pixel height on page.
+        grid_unit: Grid cell size, 0 to disable, -1 for automatic
+        outfile: Name of stl file to generate. No stl file is generated if None.
+        openscad_exec: Path to openscad executable.
+
+    Returns:
+        Rendering to be displayed.
+
+    Raises:
+        exceptions.OpenSCADError: An error occurred running OpenSCAD.
+    """
+    try:
+        if outfile:
+            render_stl(obj, outfile, openscad_exec=openscad_exec)
+            r = view_stl(outfile, width=width, height=height, grid_unit=grid_unit)
+        else:
+            with tempfile.NamedTemporaryFile(
+                suffix=".stl", delete=False
+            ) as stl_tmp_file:
+                render_stl(obj, stl_tmp_file.name, openscad_exec=openscad_exec)
+                r = view_stl(
+                    stl_tmp_file.name, width=width, height=height, grid_unit=grid_unit
+                )
+        return r
+    except RenderError as e:
+        e.show()
+
+
+def view_stl(
     stl_file: Union[str, PathLike],
     width: int = 400,
     height: int = 400,
     grid_unit: float = 1,
 ) -> pjs.Renderer:
-    """Render a visualization of a stl.
+    """View a stl.
 
     Typical usage example:
 
-        >>> display(visualize_stl(cube(3)))
+        >>> view_stl(cube(3))
 
     Args:
         stl_file: stl file to visualize.

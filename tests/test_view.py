@@ -16,16 +16,27 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
 from pathlib import Path
+from unittest.mock import Mock
 
 import pytest
+import solid2
 
-from jupyterscad import _visualize, visualize_stl
+from jupyterscad import _view, view, view_stl
+
+
+def test_view_success(monkeypatch):
+    mock_view_stl = Mock()
+    monkeypatch.setattr(_view, "view_stl", mock_view_stl)
+    monkeypatch.setattr(_view, "render_stl", Mock())
+
+    view(solid2.cube(3))
+    mock_view_stl.assert_called_once()
 
 
 def test_Visualizer_create_renderer(test_data):
-    v = _visualize.Visualizer(test_data("test.stl"))
+    v = _view.Visualizer(test_data("test.stl"))
     v.create_renderer(v.create_mesh(), v.create_camera())
 
 
-def test_visualize_stl_success(test_data):
-    visualize_stl(test_data("test.stl"))
+def test_view_stl_success(test_data):
+    view_stl(test_data("test.stl"))
