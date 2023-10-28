@@ -24,7 +24,7 @@ BUILD_DIRS = ["build", "dist"]
 nox.options.stop_on_first_error = True
 nox.options.reuse_existing_virtualenvs = False
 
-nox.options.sessions = ["format", "lint", "analyze", "test"]
+nox.options.sessions = ["format", "lint", "analyze", "test", "doctest"]
 
 
 @nox.session(python=["3.8", "3.9", "3.10", "3.11", "3.12"])
@@ -73,6 +73,14 @@ def analyze(session):
     session.install("mypy")
 
     session.run("mypy", "--ignore-missing", "src")
+
+
+@nox.session
+def doctest(session):
+    """Ensure docs build successfully"""
+    session.install("-e", ".[docs]")
+
+    session.run("mkdocs", "build")
 
 
 @nox.session

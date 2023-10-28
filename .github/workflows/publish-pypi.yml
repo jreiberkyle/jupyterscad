@@ -5,7 +5,7 @@ on:
 
 jobs:
   publish:
-    name: Build, verify, & upload package to PyPi
+    name: Build, verify, & upload package to PyPi and deploy docs
     runs-on: ubuntu-latest
 
     environment:
@@ -32,3 +32,6 @@ jobs:
 
     - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
+
+    - name: Deploy docs to github pages
+      run: nox -s deploy
