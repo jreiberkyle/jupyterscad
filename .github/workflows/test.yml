@@ -71,8 +71,8 @@ jobs:
         pip install --upgrade nox
         nox -s test-${{ matrix.python-version }}
 
-  analyze:
-    name: Docs Test
+  doctest:
+    name: Test Docs
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
