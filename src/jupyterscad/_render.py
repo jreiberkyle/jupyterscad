@@ -46,7 +46,7 @@ def render_stl(
     Raises:
         exceptions.OpenSCADException: An error occurred running OpenSCAD.
     """
-    with tempfile.NamedTemporaryFile(suffix=".scad", delete=False) as scad_tmp_file:
+    with tempfile.NamedTemporaryFile(suffix=".scad", dir=".") as scad_tmp_file:
         with open(scad_tmp_file.name, "w") as fp:
             fp.write(str(obj))
 
