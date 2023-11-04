@@ -181,8 +181,8 @@ class Visualizer:
         gh = pjs.GridHelper(
             grid_extent,
             grid_extent / unit,
-            colorCenterLine="blue",
-            colorGrid="blue",
+            colorCenterLine="green",
+            colorGrid="green",
         )
         gh.position = (grid_pos[0], 0, grid_pos[2])
         scene.add(gh)
@@ -191,8 +191,8 @@ class Visualizer:
         gh = pjs.GridHelper(
             grid_extent,
             grid_extent / unit,
-            colorCenterLine="red",
-            colorGrid="red",
+            colorCenterLine="blue",
+            colorGrid="blue",
         )
         gh.rotateX(math.pi / 2)
         gh.position = (grid_pos[0], grid_pos[1], 0)
@@ -202,8 +202,8 @@ class Visualizer:
         gh = pjs.GridHelper(
             grid_extent,
             grid_extent / unit,
-            colorCenterLine="green",
-            colorGrid="green",
+            colorCenterLine="red",
+            colorGrid="red",
         )
         gh.rotateZ(math.pi / 2)
         gh.position = (0, grid_pos[1], grid_pos[2])
