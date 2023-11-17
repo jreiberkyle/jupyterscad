@@ -31,7 +31,7 @@ def view(
     obj,
     width: int = 400,
     height: int = 400,
-    grid_unit: float = 1,
+    grid_unit: float = -1,
     outfile: Optional[Union[str, PathLike]] = None,
     openscad_exec: Optional[Union[str, PathLike]] = None,
 ) -> pjs.Renderer:
@@ -45,7 +45,7 @@ def view(
         obj: OpenSCAD object to visualize.
         width: Visualization pixel width on page.
         height: Visualization pixel height on page.
-        grid_unit: Grid cell size, 0 to disable, -1 for automatic
+        grid_unit: Grid cell size, 0 to disable, -1 for automatic.
         outfile: Name of stl file to generate. No stl file is generated if None.
         openscad_exec: Path to openscad executable.
 
@@ -76,7 +76,7 @@ def view_stl(
     stl_file: Union[str, PathLike],
     width: int = 400,
     height: int = 400,
-    grid_unit: float = 1,
+    grid_unit: float = -1,
 ) -> pjs.Renderer:
     """View a stl.
 

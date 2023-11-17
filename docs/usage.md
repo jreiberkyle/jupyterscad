@@ -65,6 +65,6 @@ view_stl('obj.stl')
 
 ### Adjusting grid size
 
-In `view` and `view_stl`, the default grid unit is 1. The grid unit can
-be set to e.g. `10` with `grid_unit=10`, disabled with `grid_unit=0` or set to
+In `view` and `view_stl`, the grid unit is autoscaled to the model. The grid unit can
+be set to e.g. `10` with `grid_unit=10`, disabled with `grid_unit=0` or manually set to
 automatic scaling with `grid_unit=-1`.

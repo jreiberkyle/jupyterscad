@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Changed
+
+- grid autoscale by default (was: grid scale = 1)
+
 ## Fixed
 
 - fix bug that did not allow for importing stls.
