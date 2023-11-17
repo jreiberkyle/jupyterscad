@@ -15,6 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see <https://www.gnu.org/licenses/>.
 """
 import logging
+import shutil
 import subprocess
 from pathlib import Path
 from unittest.mock import Mock
@@ -27,8 +28,16 @@ from jupyterscad import _render, exceptions, render_stl
 LOGGER = logging.getLogger(__name__)
 
 
+@pytest.fixture()
+def check_render():
+    try:
+        _render.detect_executable()
+    except exceptions.OpenSCADError:
+        pytest.skip("OpenSCAD not detected.")
+
+
 @pytest.mark.parametrize("obj", ["cube(size = 3);", solid2.cube(3)])
-def test_render_stl(obj, tmp_path, monkeypatch):
+def test_render_stl_str_obj(obj, tmp_path, monkeypatch):
     def side_effect(scad_file, output_file, executable):
         with open(scad_file, "r") as fp:
             assert fp.read().strip() == "cube(size = 3);"
@@ -42,6 +51,17 @@ def test_render_stl(obj, tmp_path, monkeypatch):
 
     render_stl(obj, output_file)
     mock_process.assert_called_once()
+
+
+def test_render_stl_import(tmp_path, test_data, check_render):
+    stl_path = tmp_path / "test.stl"
+    shutil.copy(test_data("test.stl"), stl_path)
+    obj = solid2.import_(stl_path)
+
+    output_file = tmp_path / "result.stl"
+    render_stl(obj, output_file)
+
+    assert open(output_file).read() == open(stl_path).read()
 
 
 @pytest.fixture()
@@ -75,14 +95,6 @@ def test_detect_executable_success(monkeypatch, tmp_path):
     """The default executable exists"""
     monkeypatch.setattr(_render, "which", lambda x, path=None: "found")
     _render.detect_executable()
-
-
-@pytest.fixture()
-def check_render():
-    try:
-        _render.detect_executable()
-    except exceptions.OpenSCADError:
-        pytest.skip("OpenSCAD not detected.")
 
 
 def test_process_success(check_render, scad_file, output_file):

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+
+- fix bug that did not allow for importing stls.
+
 
 ## [0.3.0] - 2023-10-27
 
