@@ -58,8 +58,9 @@ The release on Github and PyPi performed from a release branch while the release
   * Copy Description from the new entry in the changelog
   * Select "This is a pre-release" if applicable
 1. Verify the successful run of the Github Action "Autopublish to TestPyPi" and validate the test release on [test.pypi.org](https://test.pypi.org/project/juypterscad/)
-1. Run the Github Action "Publish on PyPi", **!!!** Set Branch to the release branch **!!!** This will also deploy the docs to gh-pages.
+1. Run the Github Action "Publish on PyPi", **!!!** Set Branch to the release branch **!!!**
 1. Verify the successful run of the Github Action "Publish on PyPi" and validate the release on [pypi.org](https://pypi.org/project/juypterscad/)
+1. Deploy the docs to gh-pages from local repo, on release branch, with `nox -s deploy`
 1. Push a commit to the PR updating `pyproject.toml` to Next Dev Version
 1. Merge PR
 1. Maintenace release only: Merge release tag into `main`
