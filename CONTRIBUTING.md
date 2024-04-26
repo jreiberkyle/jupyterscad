@@ -3,6 +3,9 @@
 Thank you for your interest in contributing to Jupyter SCAD! This
 document explains how to contribute successfully.
 
+**NOTE**: No new features are being developed. Only bug fixes will be considered for inclusion. If you are interested in continuing to add functionality,
+make an issue expressing your interest and we can discuss passing the baton.
+
 ## Workflows
 
 ### Development
