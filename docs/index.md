@@ -28,6 +28,10 @@ view(cube([1.5,2,1],center=True), outfile='cube.stl')
 
 See the [Usage](usage.md) page for more examples.
 
+## Status: MATURE
+
+This project has reached it's goal, a basic Jupyter notebook viewer for SolidPython2, and no further improvements are planned.
+
 ## License
 
 Jupyter SCAD is licensed under the [GNU GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/gpl-3.0.en.html).
