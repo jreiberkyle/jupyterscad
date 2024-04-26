@@ -1,6 +1,6 @@
 [project]
 name = "jupyterscad"
-version = "0.3.2dev"
+version = "1.0"
 authors = [{name = "Jennifer Reiber Kyle"}]
 description = "Solid 3D Cad (SCAD) renderer and viewer for Jupyter"
 readme = "README.md"
@@ -17,7 +17,7 @@ keywords = [
     "solidpython2"]
 license = {text = "GPLv3"}
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 6 - Mature",
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
