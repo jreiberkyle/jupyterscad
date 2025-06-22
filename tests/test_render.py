@@ -54,6 +54,7 @@ def test_render_stl_str_obj(obj, tmp_path, monkeypatch):
     mock_process.assert_called_once()
 
 
+@pytest.mark.skip("not a good test: floats as ints and precision depends on openscad version")
 def test_render_stl_import(tmp_path, test_data, check_render):
     stl_path = tmp_path / "test.stl"
     shutil.copy(test_data("test.stl"), stl_path)
