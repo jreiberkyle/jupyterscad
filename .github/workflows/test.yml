@@ -52,11 +52,12 @@ jobs:
         nox -s analyze
 
   test:
-    name: Test Python ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+  runs-on: ${{ matrix.os }}
+  strategy:
+    matrix:
+      os: [ubuntu-latest, windows-latest]
+      python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
