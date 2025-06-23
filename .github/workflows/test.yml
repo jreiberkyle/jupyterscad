@@ -61,16 +61,15 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+    - name: Install uv and set Python version
+      uses: astral-sh/setup-uv@v6
       with:
+        enable-cache: true
         python-version: ${{ matrix.python-version }}
-        allow-prereleases: true
-        cache: 'pip'
+    - name: Install nox
+      run: uv tool install nox
     - name: Test
-      run: |
-        pip install --upgrade nox
-        nox -s test-${{ matrix.python-version }}
+      run: nox -s test-${{ matrix.python-version }}
 
   doctest:
     name: Test Docs
