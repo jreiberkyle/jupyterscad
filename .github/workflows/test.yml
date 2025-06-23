@@ -9,15 +9,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
       with:
-        python-version: 3.8
-        cache: 'pip'
-    - name: Format
-      run: |
-        pip install --upgrade nox
-        nox -s format
+        enable-cache: true
+    - name: Install nox
+      run: uv tool install nox
+    - name: Analyze
+      run: nox -s format
 
   lint:
     name: Check Linting
@@ -25,15 +24,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
       with:
-        python-version: 3.8
-        cache: 'pip'
-    - name: Lint
-      run: |
-        pip install --upgrade nox
-        nox -s lint
+        enable-cache: true
+    - name: Install nox
+      run: uv tool install nox
+    - name: Analyze
+      run: nox -s lint
 
   analyze:
     name: Analyze Typing
@@ -41,15 +39,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
       with:
-        python-version: 3.8
-        cache: 'pip'
+        enable-cache: true
+    - name: Install nox
+      run: uv tool install nox
     - name: Analyze
-      run: |
-        pip install --upgrade nox
-        nox -s analyze
+      run: nox -s analyze
 
   test:
     name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
@@ -77,12 +74,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
       with:
-        python-version: 3.8
-        cache: 'pip'
+        enable-cache: true
+    - name: Install nox
+      run: uv tool install nox
     - name: Analyze
-      run: |
-        pip install --upgrade nox
-        nox -s doctest
+      run: nox -s doctest

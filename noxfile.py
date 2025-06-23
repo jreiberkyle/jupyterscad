@@ -26,7 +26,6 @@ nox.options.reuse_existing_virtualenvs = False
 nox.options.default_venv_backend = "uv"
 nox.options.sessions = ["format", "lint", "analyze", "test", "doctest"]
 
-
 @nox.session(python=["3.9", "3.10", "3.11", "3.12", "3.13"])
 def test(session):
     session.install(".[test]")
@@ -39,22 +38,18 @@ def test(session):
 def format(session):
     errors = []
 
-    session.install("isort")
     try:
-        session.run("python", "-m", "isort", "--check-only", "src", "tests")
+        session.run("uvx", "isort", "--check-only", "src", "tests")
     except nox.command.CommandFailed:
         errors.append(
-            "isort check failed. Pip install isort then run "
-            "'python -m isort src tests' to format files"
+            "isort check failed. Run 'uvx isort src tests' to format files."
         )
 
-    session.install("black")
     try:
-        session.run("python", "-m", "black", "--check", "src", "tests")
+        session.run("uvx", "black", "--check", "src", "tests")
     except nox.command.CommandFailed:
         errors.append(
-            "Black check failed. Pip install black then run "
-            "'python -m black src tests' to format files"
+            "Black check failed. Run 'uvx black src tests' to format files."
         )
 
     if errors:
@@ -63,16 +58,12 @@ def format(session):
 
 @nox.session
 def lint(session):
-    session.install("flake8")
-
-    session.run("flake8", "src")
+    session.run("uvx", "flake8", "src")
 
 
 @nox.session
 def analyze(session):
-    session.install("mypy")
-
-    session.run("mypy", "--ignore-missing", "src")
+    session.run("uvx", "mypy", "--ignore-missing", "src")
 
 
 @nox.session
